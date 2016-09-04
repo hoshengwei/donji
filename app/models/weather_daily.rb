@@ -1,0 +1,2 @@
+class WeatherDaily < ApplicationRecord
+end
