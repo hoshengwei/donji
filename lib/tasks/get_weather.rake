@@ -24,8 +24,8 @@ namespace :get_weather do
       if pars[0] === ("#{month}/#{day}") && pars[1] ===  ("#{time}:00")
         data = agent.get(url).search("//tr[#{i}]/td")
         temp = data[0].text.to_s
-        weather = data[2].text
-        wdir = data[3].text
+        weather = data[2].text.encode "UTF-8"
+        wdir = data[3].text.encode "UTF-8"
         wdsd = data[4].text.split(" | ")[0]
         wdlv = data[4].text.split(" | ")[1]
         humd = data[7].text
@@ -43,7 +43,7 @@ namespace :get_weather do
       pars2 = pp[1].text
       if pars1 === "#{month}/#{day}" && pars2 === "#{time}:00"
         wave = pp[3].text
-        wvdr = pp[4].text
+        wvdr = pp[4].text.encode "UTF-8"
         wvpr = pp[5].text
         ocean_temp = pp[11].text
         break

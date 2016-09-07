@@ -1,4 +1,3 @@
-env :GEM_PATH, ENV['GEM_PATH']
 # Use this file to easily define all of your cron jobs.
 #
 # It's helpful, but not entirely necessary to understand cron before proceeding.
@@ -9,7 +8,7 @@ env :GEM_PATH, ENV['GEM_PATH']
 set :output, "log/cron.log"
 #
 every 1.hours do
-  rake "get_weather:hourly"
+  rake "get_weather:hourly" RAILS_ENV=production
 end
 #
 # every 4.days do
