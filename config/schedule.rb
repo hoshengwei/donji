@@ -8,7 +8,7 @@
 set :output, "log/cron.log"
 #
 every 1.hours do
-  rake "get_weather:hourly" RAILS_ENV=production
+  rake "get_weather:hourly"
 end
 #
 # every 4.days do
