@@ -5,8 +5,6 @@
 
 # Example:
 #
-set :output, "log/cron.log"
-#
 every 1.hours do
   rake "get_weather:hourly"
 end
