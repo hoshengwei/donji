@@ -7,7 +7,13 @@
 #
 every 1.hours do
   rake "get_weather:hourly"
+  rake "get_weather:calc"
 end
+
+every 1.day, :at => '4:30 am' do
+  rake "get_weather:tide"
+end
+
 #
 # every 4.days do
 #   runner "AnotherModel.prune_old_records"
