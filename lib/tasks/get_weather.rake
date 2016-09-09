@@ -1,10 +1,22 @@
 namespace :get_weather do
+  def get_time
+    # 資料時間 (避免氣象局網站更新速度太慢抓取三小時前之資料)
+    obstime = Time.now - (3*60*60)
+    # 取得離現在時間三小時前的年月日時
+    @year = (obstime.year.to_i - 1911).to_s
+    @month = obstime.month.to_s.rjust(2, '0')
+    @day = obstime.day.to_s.rjust(2, '0')
+    @time = obstime.hour.to_s.rjust(2, '0')
+    @date = @year + @month + @day
+  end
+
+
   desc "每小時抓取氣象局基本資料(每小時執行)"
   task :hourly => :environment do
     # 所需套件
     require 'rubygems'
     require 'mechanize'
-    require "methods"
+    # require "methods"
     #資料庫所需基本數據
     get_time
     year = @year
@@ -55,7 +67,7 @@ namespace :get_weather do
 
   desc "即時更新運算每日氣象資料(每小時執行)"
   task :calc  => :environment do
-    require "methods"
+    # require "methods"
     # 取得時間
     get_time
     year = @year
@@ -90,7 +102,7 @@ namespace :get_weather do
     # 所需套件
     require 'rubygems'
     require 'mechanize'
-    require "methods"
+    # require "methods"
 
     # 創造一個Object來置入所要抓取的檔案_hourly
     agent = Mechanize.new
