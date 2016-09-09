@@ -1,0 +1,2 @@
+class WeatherMonthly < ApplicationRecord
+end
