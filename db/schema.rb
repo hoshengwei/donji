@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160904130604) do
+ActiveRecord::Schema.define(version: 20160908114809) do
 
   create_table "weather_dailies", force: :cascade do |t|
     t.integer  "weather_monthly_id"
@@ -32,6 +32,33 @@ ActiveRecord::Schema.define(version: 20160904130604) do
     t.string   "rain"
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
+  end
+
+  create_table "weather_monthlies", force: :cascade do |t|
+    t.string   "year"
+    t.string   "month"
+    t.string   "day"
+    t.string   "weather"
+    t.string   "temp"
+    t.string   "t_min"
+    t.string   "t_max"
+    t.string   "wave"
+    t.string   "rain"
+    t.string   "rain_hour"
+    t.string   "sun_rate"
+    t.string   "sun_hour"
+    t.string   "wdir"
+    t.string   "wdsd"
+    t.string   "wdlv"
+    t.string   "wd_max"
+    t.string   "humd"
+    t.string   "pres"
+    t.string   "visb"
+    t.string   "status"
+    t.string   "tide"
+    t.string   "ocean_temp"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end
