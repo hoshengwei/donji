@@ -1,0 +1,39 @@
+<div class="page-header">
+  <h1>每日天氣紀錄表<small>  -- 整點更新</small></h1>
+</div>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>月份</th>
+      <th>日期</th>
+      <th>觀測時間</th>
+      <th>天氣</th>
+      <th>氣溫(°C)</th>
+      <th>浪高(m)</th>
+      <th>當日累積雨量(mm)</th>
+      <th>風向</th>
+      <th>風力(m/s)</th>
+      <th>級數</th>
+      <th>相對溼度(%)</th>
+      <th>海平面氣壓(hPa)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @daily_reports.each do |report| %>
+    <tr>
+      <td><%= report.month %></td>
+      <td><%= report.day %></td>
+      <td><%= report.time %></td>
+      <td><%= report.weather %></td>
+      <td><%= report.temp %></td>
+      <td><%= report.wave %></td>
+      <td><%= report.rain %></td>
+      <td><%= report.wdir %></td>
+      <td><%= report.wdsd %></td>
+      <td><%= report.wdlv %></td>
+      <td><%= report.humd %></td>
+      <td><%= report.pres %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

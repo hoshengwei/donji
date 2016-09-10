@@ -6,7 +6,7 @@ namespace :get_weather do
     require 'mechanize'
     require "methods"
     #資料庫所需基本數據
-    get_time
+    get_time(3)
     year = @year
     month = @month
     day = @day
@@ -57,7 +57,7 @@ namespace :get_weather do
   task :calc  => :environment do
     require "methods"
     # 取得時間
-    get_time
+    get_time(3)
     year = @year
     month = @month
     day = @day
@@ -73,7 +73,7 @@ namespace :get_weather do
     t_min = day_data.minimum(:temp)
     t_max = day_data.maximum(:temp)
     wave = day_data.minimum(:wave) + " - " + day_data.maximum(:wave)
-    wdsd = day_data.minimum(:wdsd) + " - " + day_data.maximum(:wdsd)
+    wdsd = day_data.average(:wdsd).round(1)
     wdlv = day_data.minimum(:wdlv) + " - " + day_data.maximum(:wdlv)
     rain = day_data.maximum(:rain)
     status = "先行運算"
@@ -85,7 +85,7 @@ namespace :get_weather do
     WeatherMonthly.find(id).update_attributes( year: year,  month: month, day: day, temp: temp, humd: humd, pres: pres, ocean_temp: ocean_temp, t_min: t_min, t_max: t_max, wave: wave, wdsd: wdsd, wdlv: wdlv, rain: rain, status: status, weather: @weather, wdir: @wdir)
   end
 
-  desc "取得潮汐時間並創建本日報表(每天早上五點執行)"
+  desc "取得潮汐時間並創建本日報表(每天早上四點半執行)"
   task :tide => :environment do
     # 所需套件
     require 'rubygems'
@@ -116,8 +116,15 @@ namespace :get_weather do
       tide.append(temp)
     end
 
-    get_time
+    get_time(3)
     id = @date.to_i
     WeatherMonthly.create(id: id, tide: tide)
+  end
+
+  desc "抓取氣象局觀測資料前一日報表數據更新(每天下午三點執行也可手動執行更新)"
+  task :update => :environment do
+    require "methods"
+    get_time(24)
+    update_weather_monthly_report(@year, @month, @day)
   end
 end

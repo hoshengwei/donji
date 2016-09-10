@@ -1,3 +1,8 @@
- // Custom bootstrap variables must be set or imported before bootstrap itself.
- @import "bootstrap";
- body { padding-top: 70px; }
+// Custom bootstrap variables must be set or imported before bootstrap itself.
+@import "bootstrap";
+*{
+  font-family: 微軟正黑體;
+}
+body {
+  padding-top: 70px;
+}
