@@ -1,0 +1,60 @@
+
+<div class="row">
+  <div class="page-header">
+    <h1>每月天氣紀錄表<small>-- AM 03:00 資料統整-PM 13:30 同步氣象局資料</small></h1>
+  </div>
+  <table class="table table-hover table-sm table-responsive">
+    <thead class="bg-primary">
+      <tr>
+        <th>日期</th>
+        <th>天氣</th>
+        <th data-toggle="tooltip" data-placement="top" data-original-title="單位：°C">氣溫</th>
+        <th data-toggle="tooltip" data-placement="top" data-original-title="單位：°C">高溫</th>
+        <th data-toggle="tooltip" data-placement="top" data-original-title="單位：°C">低溫</th>
+        <th data-toggle="tooltip" data-placement="top" data-original-title="單位：m">浪高</th>
+        <th data-toggle="tooltip" data-placement="top" data-original-title="單位：°C">海溫</th>
+        <th>潮汐時間</th>
+        <th data-toggle="tooltip" data-placement="top" data-original-title="單位：mm">累積雨量</th>
+        <th class="hidden-lg-down" data-toggle="tooltip" data-placement="top" data-original-title="單位：hr">降雨時數</th>
+        <th data-toggle="tooltip" data-placement="top" data-original-title="單位：%">日照率</th>
+        <th data-toggle="tooltip" data-placement="top" data-original-title="單位：hr">日照時數</th>
+        <th>風向</th>
+        <th data-toggle="tooltip" data-placement="top" data-original-title="單位：m/s">風速</th>
+        <th data-toggle="tooltip" data-placement="top" data-original-title="單位：級">風力</th>
+        <th data-toggle="tooltip" data-placement="top" data-original-title="單位：m/s">最大陣風</th>
+        <th data-toggle="tooltip" data-placement="top" data-original-title="單位：%">相對溼度</th>
+        <th data-toggle="tooltip" data-placement="top" data-original-title="單位：hPa">海平面氣壓</th>
+        <th data-toggle="tooltip" data-placement="top" data-original-title="單位：km">能見度</th>
+        <th>數據狀態</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @monthly_reports.each do |report| %>
+        <tr>
+          <td><%= report.month + "/" + report.day %></td>
+          <td><%= report.weather %></td>
+          <td><%= report.temp %></td>
+          <td><%= report.t_max %></td>
+          <td><%= report.t_min %></td>
+          <td><%= report.wave %></td>
+          <td><%= report.ocean_temp %></td>
+          <td><a href="#">點我查看</a></td>
+          <td><%= report.rain %></td>
+          <td class="hidden-lg-down"><%= report.rain_hour %></td>
+          <td><%= report.sun_rate %></td>
+          <td><%= report.sun_hour %></td>
+          <td><%= report.wdir %></td>
+          <td><%= report.wdsd %></td>
+          <td><%= report.wdlv %></td>
+          <td><%= report.wd_max %></td>
+          <td><%= report.humd %></td>
+          <td><%= report.pres %></td>
+          <td><%= report.visb %></td>
+          <td><%= report.status %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+<!-- bootstrap tooltip initialize -->
+<script> $(function () { $("[data-toggle='tooltip']").tooltip(); }); </script>

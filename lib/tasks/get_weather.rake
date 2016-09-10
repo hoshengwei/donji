@@ -66,10 +66,10 @@ namespace :get_weather do
 
     #取得對應的資料
     day_data = WeatherDaily.where("weather_monthly_id = #{date}")
-    temp = day_data.average(:temp).round(2)
-    humd = day_data.average(:humd).round(2)
-    pres = day_data.average(:pres).round(2)
-    ocean_temp = day_data.average(:ocean_temp).round(2)
+    temp = day_data.average(:temp).round(1)
+    humd = day_data.average(:humd).round(1)
+    pres = day_data.average(:pres).round(1)
+    ocean_temp = day_data.average(:ocean_temp).round(1)
     t_min = day_data.minimum(:temp)
     t_max = day_data.maximum(:temp)
     wave = day_data.minimum(:wave) + " - " + day_data.maximum(:wave)

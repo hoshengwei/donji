@@ -2,7 +2,7 @@
 #
 # It's helpful, but not entirely necessary to understand cron before proceeding.
 # http://en.wikipedia.org/wiki/Cron
-
+set :output, { error: 'log/cron_error.log' }
 # Example:
 #
 every 1.hours do
