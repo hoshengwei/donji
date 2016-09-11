@@ -14,13 +14,13 @@
           <th>潮汐時間</th>
           <th class="hidden-sm-down" data-toggle="tooltip" data-placement="top" data-original-title="單位：mm">累積雨量</th>
           <th class="hidden-lg-down" data-toggle="tooltip" data-placement="top" data-original-title="單位：hr">降雨時數</th>
-          <th class="hidden-lg-down">風向</th>
-          <th  class="hidden-md-down" data-toggle="tooltip" data-placement="top" data-original-title="單位：m/s">風速</th>
+          <th class="hidden-md-down">風向</th>
+          <th data-toggle="tooltip" data-placement="top" data-original-title="單位：m/s">風速</th>
           <th class="hidden-xs-down" data-toggle="tooltip" data-placement="top" data-original-title="單位：級">風力</th>
           <th data-toggle="tooltip" data-placement="top" data-original-title="單位：m/s">最大陣風</th>
           <th class="hidden-lg-down" data-toggle="tooltip" data-placement="top" data-original-title="單位：hPa">海面氣壓</th>
           <th class="hidden-md-down" data-toggle="tooltip" data-placement="top" data-original-title="單位：km">能見度</th>
-          <th>數據狀態</th>
+          <th class="hidden-xs-down">數據狀態</th>
         </tr>
       </thead>
       <tbody>
@@ -36,13 +36,13 @@
             <td><button type="button" class="btn btn-sm btn-outline-primary" data-container="body" data-toggle="popover" title="潮汐時間: <%= report.day %> 號" data-placement="bottom" data-content="<%= tide  %>">點我查看</button></td>
             <td class="hidden-sm-down" ><%= report.rain %></td>
             <td class="hidden-lg-down"><%= report.rain_hour %></td>
-            <td class="hidden-lg-down"><%= report.wdir %></td>
-            <td class="hidden-md-down"><%= report.wdsd %></td>
+            <td class="hidden-md-down"><%= report.wdir %></td>
+            <td><%= report.wdsd %></td>
             <td class="hidden-xs-down"><%= report.wdlv %></td>
             <td><%= report.wd_max %></td>
             <td class="hidden-lg-down"><%= report.pres %></td>
             <td class="hidden-md-down"><%= report.visb %></td>
-            <td><%= report.status %></td>
+            <td class="hidden-xs-down"><%= report.status %></td>
           </tr>
         <% end %>
       </tbody>

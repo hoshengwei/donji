@@ -21,11 +21,12 @@
             <button class="navbar-toggler hidden-sm-up btn-primary btn-lg pull-xs-right" type="button" data-toggle="collapse" data-target="#nav_menu" aria-controls="nav_menu" aria-expanded="false" aria-label="Toggle navigation">
             &#9776;
             </button>
-            <a class="navbar-brand h1 hidden-sm-up" href="#">東吉管理站</a>
+            <div><%= link_to "東吉管理站" , root_path , class: "navbar-brand h1 hidden-sm-up" %></div>
+
           </div>
           <div id="nav_menu" class="collapse navbar-toggleable-xs" >
             <div class="nav navbar-nav" >
-              <a class="navbar-brand h1 hidden-xs-down" href="#">東吉管理站</a>
+              <div><%= link_to "東吉管理站" , root_path , class: "navbar-brand h1 hidden-xs-down" %></div>
               <a class="nav-item nav-link active" href="#">氣象資料 <span class="sr-only">(current)</span></a>
               <a class="nav-item nav-link " href="#">其他</a>
               <a class="nav-item nav-link pull-sm-right" href="#">登入</a>
@@ -41,7 +42,7 @@
 
 
     <!-- content area -->
-  
+
 
     <%= yield %>
 

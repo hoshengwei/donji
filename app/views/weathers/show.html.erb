@@ -1,39 +1,51 @@
-<div class="page-header">
-  <h1>每日天氣紀錄表<small>  -- 整點更新</small></h1>
+<div class="container">
+  <div class="row">
+    <div class="page-header">
+      <h2 class="h3">天氣日報表<span class="h6">--整點更新(3小時前數據)--</span></h2>
+    </div>
+    <table class="table table-hover table-sm">
+      <thead class="bg-primary">
+        <tr>
+          <th>日期</th>
+          <th>時間</th>
+          <th>天氣</th>
+          <th data-toggle="tooltip" data-placement="top" data-original-title="單位：°C">氣溫</th>
+          <th data-toggle="tooltip" data-placement="top" data-original-title="單位：m">浪高</th>
+          <th class="hidden-sm-down">浪向</th>
+          <th class="hidden-md-down" data-toggle="tooltip" data-placement="top" data-original-title="單位：秒">波浪週期</th>
+          <th class="hidden-md-down" data-toggle="tooltip" data-placement="top" data-original-title="單位：°C">海溫</th>
+          <th class="hidden-xs-down" data-toggle="tooltip" data-placement="top" data-original-title="單位：mm">累積雨量</th>
+          <th>風向</th>
+          <th data-toggle="tooltip" data-placement="top" data-original-title="單位：m/s">風速</th>
+          <th class="hidden-xs-down" data-toggle="tooltip" data-placement="top" data-original-title="單位：級">風力</th>
+          <th class="hidden-xs-down" data-toggle="tooltip" data-placement="top" data-original-title="單位：%">相對溼度</th>
+          <th class="hidden-sm-down" data-toggle="tooltip" data-placement="top" data-original-title="單位：hPa">海面氣壓</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @daily_reports.each do |report| %>
+        <tr>
+          <td><%= report.month + '/' + report.day %></td>
+          <td><%= report.time + ":00"%></td>
+          <td><%= report.weather %></td>
+          <td><%= report.temp %></td>
+          <td><%= report.wave %></td>
+          <td class="hidden-sm-down"><%= report.wvdr %></td>
+          <td class="hidden-md-down"><%= report.wvpr %></td>
+          <td class="hidden-md-down"><%= report.ocean_temp %></td>
+          <td class="hidden-xs-down"><%= report.rain %></td>
+          <td><%= report.wdir %></td>
+          <td><%= report.wdsd %></td>
+          <td class="hidden-xs-down"><%= report.wdlv %></td>
+          <td class="hidden-xs-down"><%= report.humd %></td>
+          <td class="hidden-sm-down"><%= report.pres %></td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
 </div>
-<table class="table table-hover">
-  <thead>
-    <tr>
-      <th>月份</th>
-      <th>日期</th>
-      <th>觀測時間</th>
-      <th>天氣</th>
-      <th>氣溫(°C)</th>
-      <th>浪高(m)</th>
-      <th>當日累積雨量(mm)</th>
-      <th>風向</th>
-      <th>風力(m/s)</th>
-      <th>級數</th>
-      <th>相對溼度(%)</th>
-      <th>海平面氣壓(hPa)</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @daily_reports.each do |report| %>
-    <tr>
-      <td><%= report.month %></td>
-      <td><%= report.day %></td>
-      <td><%= report.time %></td>
-      <td><%= report.weather %></td>
-      <td><%= report.temp %></td>
-      <td><%= report.wave %></td>
-      <td><%= report.rain %></td>
-      <td><%= report.wdir %></td>
-      <td><%= report.wdsd %></td>
-      <td><%= report.wdlv %></td>
-      <td><%= report.humd %></td>
-      <td><%= report.pres %></td>
-    </tr>
-    <% end %>
-  </tbody>
-</table>
+
+<script>
+  $(function () { $("[data-toggle='tooltip']").tooltip(); });
+</script>

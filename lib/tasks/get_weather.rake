@@ -125,6 +125,7 @@ namespace :get_weather do
   task :update => :environment do
     require "methods"
     get_time(24)
-    update_weather_monthly_report(@year, @month, @day)
+    # update_weather_monthly_report(@year, @month, @day)
+    update_weather_monthly_report(105, 09, 01)
   end
 end
