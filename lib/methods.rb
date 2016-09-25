@@ -37,5 +37,5 @@ def update_weather_monthly_report(date)
     end
   end
   #寫入資料庫
-  WeatherMonthly.find(id).update_attributes( temp: @temp, humd: @humd, pres: @pres,  t_min: @t_min, t_max: @t_max, wdsd: @wdsd, wd_max: @wd_max, visb: @visb,  sun_rate: @sun_rate, sun_hour: @sun_hour, rain_hour: @rain_hour, rain: @rain, status: @status, weather: @weather)
+  WeatherMonthly.find(id).update_attributes( temp: @temp, humd: @humd, pres: @pres,  t_min: @t_min, t_max: @t_max, wdsd: @wdsd, wd_max: @wd_max, visb: @visb,  sun_rate: @sun_rate, sun_hour: @sun_hour, rain_hour: @rain_hour, rain: @rain, status: @status)
 end
