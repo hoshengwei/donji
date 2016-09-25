@@ -26,7 +26,7 @@
       <tbody>
         <% @monthly_reports.each do |report| %>
           <tr>
-            <td><%= link_to report.month + '/' + report.day ,weather_path(report) %></td>
+            <td><%= link_to report.month.to_s + '/' + report.day.to_s, weather_path(report) %></td>
             <td class="hidden-xs-down"><%= report.weather %></td>
             <td class="hidden-xs-down"><%= report.temp %></td>
             <td><%= report.wave %></td>

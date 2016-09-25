@@ -125,20 +125,8 @@ namespace :get_weather do
   task :update => :environment do
     require "methods"
     get_time(24)
-    # update_weather_monthly_report(@year, @month, @day)
-    update_weather_monthly_report
+    update_weather_monthly_report(@date)
+
   end
 
-  desc "抓取氣象局執行更新)"
-  task :test => :environment do
-    require "nokogiri"
-    require 'open-uri'
-
-    # url source
-    url = "http://e-service.cwb.gov.tw/HistoryDataQuery/MonthDataController.do?command=viewMain&station=467300&stname=%25E6%259D%25B1%25E5%2590%2589%25E5%25B3%25B6&datepicker=2016-09"
-    #parse
-
-    doc1 = Nokogiri::HTML(open(url))
-    puts doc1
-  end
 end

@@ -10,11 +10,11 @@ every 1.hours do
   rake "get_weather:calc"
 end
 
-every 1.day, :at => '4:30 am' do
+every 1.day, :at => '4:30am' do
   rake "get_weather:tide"
 end
 
-every 1.day, :at => '4:00 pm' do
+every 1.day, :at => '3:30pm' do
   rake "get_weather:update"
 end
 
