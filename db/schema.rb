@@ -10,7 +10,34 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160908114809) do
+ActiveRecord::Schema.define(version: 20160926035300) do
+
+  create_table "ocean_inspects", force: :cascade do |t|
+    t.string   "s_time"
+    t.string   "e_time"
+    t.string   "boat"
+    t.string   "weather"
+    t.string   "wave"
+    t.string   "leader"
+    t.string   "location"
+    t.string   "crew"
+    t.string   "gas"
+    t.string   "oil"
+    t.string   "distance"
+    t.string   "captain"
+    t.text     "diary"
+    t.text     "work_items"
+    t.text     "note"
+    t.string   "yeat"
+    t.string   "month"
+    t.string   "day"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.string   "img_file_name"
+    t.string   "img_content_type"
+    t.integer  "img_file_size"
+    t.datetime "img_updated_at"
+  end
 
   create_table "weather_dailies", force: :cascade do |t|
     t.integer  "weather_monthly_id"

@@ -1,0 +1,26 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Ocean Inspects</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @ocean_inspects.each do |ocean_inspect| %>
+      <tr>
+        <td><%= image_tag ocean_inspect.img.url(:large)%></td>
+        <td><%= link_to 'Show', ocean_inspect %></td>
+        <td><%= link_to 'Edit', edit_ocean_inspect_path(ocean_inspect) %></td>
+        <td><%= link_to 'Destroy', ocean_inspect, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Ocean Inspect', new_ocean_inspect_path %>

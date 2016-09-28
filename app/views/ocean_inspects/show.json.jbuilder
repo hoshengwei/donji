@@ -1,0 +1,1 @@
+json.partial! "ocean_inspects/ocean_inspect", ocean_inspect: @ocean_inspect

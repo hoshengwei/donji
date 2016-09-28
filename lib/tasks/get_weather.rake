@@ -63,7 +63,7 @@ namespace :get_weather do
     day = @day
     date = @date
     id = date.to_i
-
+    WeatherMonthly.find(id).update_attributes( year: year,  month: month, day: day)
     #取得對應的資料
     day_data = WeatherDaily.where("weather_monthly_id = #{date}")
     temp = day_data.average(:temp).round(1)
@@ -82,7 +82,7 @@ namespace :get_weather do
       @wdir = p.wdir
     end
     #寫入資料庫
-    WeatherMonthly.find(id).update_attributes( year: year,  month: month, day: day, temp: temp, humd: humd, pres: pres, ocean_temp: ocean_temp, t_min: t_min, t_max: t_max, wave: wave, wdsd: wdsd, wdlv: wdlv, rain: rain, status: status, weather: @weather, wdir: @wdir)
+    WeatherMonthly.find(id).update_attributes( temp: temp, humd: humd, pres: pres, ocean_temp: ocean_temp, t_min: t_min, t_max: t_max, wave: wave, wdsd: wdsd, wdlv: wdlv, rain: rain, status: status, weather: @weather, wdir: @wdir)
   end
 
   desc "取得潮汐時間並創建本日報表(每天早上四點半執行)"
@@ -116,7 +116,7 @@ namespace :get_weather do
       tide.append(temp)
     end
 
-    get_time(3)
+    get_time(2)
     id = @date.to_i
     WeatherMonthly.create(id: id, tide: tide)
   end

@@ -1,0 +1,22 @@
+<%= form_for(ocean_inspect) do |f| %>
+  <% if ocean_inspect.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(ocean_inspect.errors.count, "error") %> prohibited this ocean_inspect from being saved:</h2>
+
+      <ul>
+      <% ocean_inspect.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= form_for @ocean_inspect, html: { multipart: true } do |form| %>
+  <p>
+    <%= f.file_field :img %>
+  </p>
+  <p><%= f.submit "Submit" %></p>
+  <% end %>
+
+
+<% end %>
