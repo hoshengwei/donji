@@ -77,7 +77,7 @@ namespace :get_weather do
     wdlv = day_data.minimum(:wdlv) + " - " + day_data.maximum(:wdlv)
     rain = day_data.maximum(:rain)
     status = "先行運算"
-    day_data.where('time = "14"').each do |p|
+    day_data.where('time = "11"').each do |p|
       @weather = p.weather
       @wdir = p.wdir
     end
