@@ -1,2 +1,2 @@
-json.extract! ocean_inspect, :id, :created_at, :updated_at
+json.extract! ocean_inspect, :id, :s_time, :e_time, :boat_id, :weather, :wave, :leader, :location, :crew, :gas, :oil, :distance, :captain, :diary, :work_items, :note, :year, :month, :day, :date, :created_at, :updated_at
 json.url ocean_inspect_url(ocean_inspect, format: :json)

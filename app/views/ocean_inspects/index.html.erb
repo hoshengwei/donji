@@ -5,6 +5,25 @@
 <table>
   <thead>
     <tr>
+      <th>S time</th>
+      <th>E time</th>
+      <th>Boat</th>
+      <th>Weather</th>
+      <th>Wave</th>
+      <th>Leader</th>
+      <th>Location</th>
+      <th>Crew</th>
+      <th>Gas</th>
+      <th>Oil</th>
+      <th>Distance</th>
+      <th>Captain</th>
+      <th>Diary</th>
+      <th>Work items</th>
+      <th>Note</th>
+      <th>Year</th>
+      <th>Month</th>
+      <th>Day</th>
+      <th>Date</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -12,7 +31,25 @@
   <tbody>
     <% @ocean_inspects.each do |ocean_inspect| %>
       <tr>
-        <td><%= image_tag ocean_inspect.img.url(:large)%></td>
+        <td><%= ocean_inspect.s_time %></td>
+        <td><%= ocean_inspect.e_time %></td>
+        <td><%= ocean_inspect.boat_id %></td>
+        <td><%= ocean_inspect.weather %></td>
+        <td><%= ocean_inspect.wave %></td>
+        <td><%= ocean_inspect.leader %></td>
+        <td><%= ocean_inspect.location %></td>
+        <td><%= ocean_inspect.crew %></td>
+        <td><%= ocean_inspect.gas %></td>
+        <td><%= ocean_inspect.oil %></td>
+        <td><%= ocean_inspect.distance %></td>
+        <td><%= ocean_inspect.captain %></td>
+        <td><%= ocean_inspect.diary %></td>
+        <td><%= ocean_inspect.work_items %></td>
+        <td><%= ocean_inspect.note %></td>
+        <td><%= ocean_inspect.year %></td>
+        <td><%= ocean_inspect.month %></td>
+        <td><%= ocean_inspect.day %></td>
+        <td><%= ocean_inspect.date %></td>
         <td><%= link_to 'Show', ocean_inspect %></td>
         <td><%= link_to 'Edit', edit_ocean_inspect_path(ocean_inspect) %></td>
         <td><%= link_to 'Destroy', ocean_inspect, method: :delete, data: { confirm: 'Are you sure?' } %></td>
