@@ -1,0 +1,1 @@
+json.array! @usefuls, partial: 'usefuls/useful', as: :useful

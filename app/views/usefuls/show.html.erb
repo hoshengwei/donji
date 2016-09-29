@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @useful.name %>
+</p>
+
+<p>
+  <strong>Catalog:</strong>
+  <%= @useful.catalog %>
+</p>
+
+<%= link_to 'Edit', edit_useful_path(@useful) %> |
+<%= link_to 'Back', usefuls_path %>

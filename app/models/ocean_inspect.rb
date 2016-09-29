@@ -1,2 +1,3 @@
 class OceanInspect < ApplicationRecord
+
 end
