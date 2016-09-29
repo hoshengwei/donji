@@ -28,9 +28,10 @@ ActiveRecord::Schema.define(version: 20160926035300) do
     t.text     "diary"
     t.text     "work_items"
     t.text     "note"
-    t.string   "yeat"
+    t.string   "year"
     t.string   "month"
     t.string   "day"
+    t.string   "date"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
     t.string   "img_file_name"

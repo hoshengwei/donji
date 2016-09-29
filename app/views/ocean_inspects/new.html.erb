@@ -1,5 +1,23 @@
-<h1>New Ocean Inspect</h1>
 
-<%= render 'form', ocean_inspect: @ocean_inspect %>
+<div class="container">
+  <h2 class="Display-4 text-center">新增海域巡查紀錄</h2>
+  <hr>
+  <%= simple_form_for @ocean_inspect do |f| %>
+    <%= f.input :date, label: '巡查日期' %>
+    <%= f.input :s_time, label: '出航時間' %>
+    <%= f.input :e_time, label: '返航時間' %>
+    <%= f.input :boat, label: '使用船隻',  placeholder: '保育一號',  hint: '提示' %>
+    <%= f.input :leader,inline_label: 'Yes, remember me' %>
+    <%= f.input :img, as: :file, label: '上傳圖片' %>
+    <%= f.button :submit %>
+  <% end %>
 
-<%= link_to 'Back', ocean_inspects_path %>
+
+</div>
+
+<script>
+  // The date picker (read the docs)
+  $('#ocean_inspect_date').pickadate({format: 'yyyy-mm-dd'})
+  $('#ocean_inspect_s_time').pickatime({formatSubmit: 'HH:i'})
+  $('#ocean_inspect_e_time').pickatime({formatSubmit: 'HH:i'})
+</script>
