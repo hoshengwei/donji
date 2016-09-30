@@ -20,3 +20,4 @@
 //= require pickadate/picker.date
 //= require pickadate/picker.time
 //= require pickadate/translations/zh_TW
+//= require cocoon
