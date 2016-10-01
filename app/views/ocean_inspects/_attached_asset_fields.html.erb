@@ -1,0 +1,10 @@
+<div class="nested-fields" style="padding-bottom: 10px;">
+  <div class="field">
+    <%= f.input :category %>
+  </div>
+  <div class="field">
+    <%= f.input :asset, as: :file, label: "File to submit" %>
+  </div>
+
+  <%= link_to_remove_association "Remove file", f %>
+</div>

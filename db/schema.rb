@@ -10,7 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160930011434) do
+ActiveRecord::Schema.define(version: 20160930030008) do
+
+  create_table "attached_assets", force: :cascade do |t|
+    t.string   "category"
+    t.integer  "ocean_inspect_id"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.string   "asset_file_name"
+    t.string   "asset_content_type"
+    t.integer  "asset_file_size"
+    t.datetime "asset_updated_at"
+  end
 
   create_table "boats", force: :cascade do |t|
     t.string   "name"

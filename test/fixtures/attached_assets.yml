@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  category: MyString
+  ocean_inspect_id: 1
+
+two:
+  category: MyString
+  ocean_inspect_id: 1
