@@ -28,6 +28,8 @@ gem 'jbuilder', '~> 2.5'
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
+gem 'mini_magick'
+gem 'carrierwave', github: 'carrierwaveuploader/carrierwave'
 gem 'bootstrap', '~> 4.0.0.alpha3.1'
 gem 'mechanize', '~> 2.7', '>= 2.7.5'
 gem "paperclip", "~> 5.0.0"
