@@ -1,41 +1,35 @@
-<%= simple_form_for @ocean_inspect, url: ocean_inspects_path do |f| %>
+<%= simple_form_for(@ocean_inspect) do |f| %>
   <%= f.error_notification %>
 
   <div class="form-inputs">
     <%= f.input :date, label: '巡查日期' %>
     <%= f.input :s_time, label: '出航時間' %>
     <%= f.input :e_time, label: '返航時間' %>
-    <%= f.input :boat_id, collection: Boat.all, label: '使用船隻'%>
-    <%= f.input :captain, collection: Staff.where("role ='船公司'"), label: '船長'%>
-    <%= f.input :leader, collection: Staff.where("role ='國家公園'"), label: '領隊'%>
-    <%= f.input :crew, as: :check_boxes, collection: Staff.all, label: '搭載人員' %>
-    <%= f.input :location, as: :check_boxes, collection: Useful.where("catalog ='巡查海域'"), label: '巡查海域' %>
+    <%= f.input :boat_id, collection: Boat.all, label: '使用船隻', input_html: { class: "custom-select" }%>
+    <%= f.input :captain, collection: Staff.where("role ='船公司'"), label: '船長', input_html: { class: "custom-select" }%>
+    <%= f.input :leader, collection: Staff.where("role ='國家公園'"), label: '領隊', input_html: { class: "custom-select" }%>
+    <%= f.input :crew, as: :check_boxes, collection: Staff.all, label: '搭載人員', label_html: { class: "form-check" }%>
+    <%= f.input :location, as: :check_boxes, collection: Useful.where("catalog ='巡查海域'"), label: '巡查海域',label_html: { class: "form-check" } %>
     <%= f.input :distance, label: '航行海浬'%>
     <%= f.input :gas ,label: '添加汽油(公升)'%>
     <%= f.input :oil, label: '添加機油(公升)' %>
-    <%= f.input :work_items, as: :check_boxes, collection: Useful.where("catalog ='工作項目'"), label: '工作項目' %>
+    <%= f.input :work_items, as: :check_boxes, collection: Useful.where("catalog ='工作項目'"), label: '工作項目',label_html: { class: "form-check" }  %>
     <%= f.input :diary  ,label: '巡查記事'%>
     <%= f.input :note ,label: '備註事項'%>
-    <h3>上傳圖片</h3>
-    <div id="attached_assets">
-      <%= f.simple_fields_for :attached_assets, AttachedAsset.new do |asset| %>
-        <%= render 'attached_asset_fields', :f => asset %>
-        <div class="links">
-          <%= link_to_add_association '新增圖片', f, :attached_assets %>
-        </div>
-      <% end %>
-    </div>
-    <!-- <%= f.input :year %>
-    <%= f.input :month %>
-    <%= f.input :day %> -->
-    <!-- <%= f.input :img, as: :file, label: '上傳圖片' %> -->
 
+    <%= f.input :pics, label:'附加圖片' ,label_html: { class: "custom-file"} do %>
+      <%= f.file_field :pics, multiple: true ,class: "form-control-file"%>
+      <%= f.hidden_field :pics_cache %>
+    <% end %>
+    <%= image_tag(@ocean_inspect.pics.first.url) if @ocean_inspect.pics? %>
+  </div>
+  <hr>
   <div class="form-actions">
-    <%= f.button :submit %>
+    <%= f.button :submit,  "新建表單", class: "btn btn-primary" %>
   </div>
 <% end %>
 
-
+</div>
 
 
 <script>

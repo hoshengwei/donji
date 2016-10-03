@@ -69,6 +69,6 @@ class OceanInspectsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def ocean_inspect_params
-      params.require(:ocean_inspect).permit(:s_time, :e_time, :boat_id, :weather, :wave, :leader, :location , :crew, :gas, :oil, :distance, :captain, :diary, :work_items, :note, :year, :month, :day, :date,:img, crew: [],location: [], work_items: [], attached_assets_attributes: [:id, :asset, :category, :_destroy])
+      params.require(:ocean_inspect).permit( {pics:[]}, {pics_cache:[]}, :s_time, :e_time, :boat_id, :weather, :wave, :leader, :location , :crew, :gas, :oil, :distance, :captain, :diary, :work_items, :note, :year, :month, :day, :date,crew: [], location: [])
     end
 end

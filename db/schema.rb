@@ -10,7 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160930030008) do
+ActiveRecord::Schema.define(version: 20161002121553) do
+
 
   create_table "attached_assets", force: :cascade do |t|
     t.string   "category"
@@ -57,6 +58,9 @@ ActiveRecord::Schema.define(version: 20160930030008) do
     t.string   "img_content_type"
     t.integer  "img_file_size"
     t.datetime "img_updated_at"
+    t.         "images"
+    t.string   "pics"
+
   end
 
   create_table "staffs", force: :cascade do |t|
