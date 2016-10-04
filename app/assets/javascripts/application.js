@@ -21,3 +21,4 @@
 //= require pickadate/picker.time
 //= require pickadate/translations/zh_TW
 //= require cocoon
+//= require tinymce-jquery
