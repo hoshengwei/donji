@@ -37,6 +37,7 @@ gem 'simple_form'
 gem 'pickadate-rails'
 gem "cocoon"
 gem 'tinymce-rails'
+gem 'hamlit'
 # Use Capistrano for deployment
 gem 'capistrano-rails', group: :development
 

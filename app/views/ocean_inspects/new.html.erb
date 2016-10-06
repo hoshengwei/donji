@@ -1,10 +1,7 @@
 <div class="container">
   <div class="row">
-
   <h2 class="Display-4 text-center">新增海域巡查紀錄</h2>
   <hr>
-  <%= tinymce_assets %>
-  <%= tinymce %>
   <%= simple_form_for(@ocean_inspect) do |f| %>
     <%= f.error_notification %>
     <div class="form-inputs col-xl-12">
@@ -30,6 +27,7 @@
       </div>
       <div class="col-xl-7 col-lg-12">
         <div id="text">
+          <%= tinymce %>
           <%= f.input :diary  ,label: '巡查記事',input_html: {class: "tinymce", rows: 8 }%>
           <%= f.input :note ,label: '備註事項'%>
         </div>

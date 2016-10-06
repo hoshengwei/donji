@@ -4,14 +4,17 @@ class OceanInspect < ApplicationRecord
     if attribute_present?("crew")
       self.crew.gsub!(/[\[\]\"]/, "")
       self.crew[0] = ""
+      self.crew.gsub!(/,/, " 、")
     end
     if attribute_present?("location")
       self.location.gsub!(/[\[\]\"]/, "")
       self.location[0] = ""
+      self.location.gsub!(/,/, " 、")
     end
     if attribute_present?("work_items")
       self.work_items.gsub!(/[\[\]\"]/, "")
       self.work_items[0] = ""
+      self.work_items.gsub!(/,/, " 、")
     end
 
     self.year = self.date.split("-")[0].to_i-1911
@@ -23,4 +26,5 @@ class OceanInspect < ApplicationRecord
 
   mount_uploaders :pics, ImageUploader
   serialize :pics
+
 end
