@@ -80,6 +80,7 @@
     <p class="font-weight-bold col-lg-6 p-x-0">主管：</p>
   </div>
   <div id="controll" class="col-lg-12">
+    <%= link_to "輸出pdf報表", ocean_inspect_path(params[:id],format: "pdf"), class: "btn btn-primary btn-sm pull-xs-right m-b-2" %>
     <%= link_to("編輯紀錄表", edit_ocean_inspect_path(params[:id]), class: "btn btn-primary btn-sm pull-xs-right m-b-2") %>
   </div>
 <div>

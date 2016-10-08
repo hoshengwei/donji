@@ -10,6 +10,17 @@ class OceanInspectsController < ApplicationController
   # GET /ocean_inspects/1
   # GET /ocean_inspects/1.json
   def show
+    respond_to do |format|
+      format.html
+      format.pdf do
+        pdf = OceanInspectPdf.new(@ocean_inspect)
+        send_data pdf.render, filename: "#{@ocean_inspect.year+@ocean_inspect.month+@ocean_inspect.day}海域巡查紀錄報表.pdf",
+                              type: "application/pdf",
+                              disposition: "inline"
+
+
+      end
+    end
   end
 
   # GET /ocean_inspects/new

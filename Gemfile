@@ -38,6 +38,8 @@ gem 'pickadate-rails'
 gem "cocoon"
 gem 'tinymce-rails'
 gem 'hamlit'
+gem 'prawn'
+gem 'prawn-table'
 # Use Capistrano for deployment
 gem 'capistrano-rails', group: :development
 
