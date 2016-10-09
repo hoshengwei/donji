@@ -63,14 +63,14 @@ class OceanInspectPdf < Prawn::Document
       ["航行路線：",{image: map, fit:[230,230], position: :center, colspan: 6}]
     ]
 
-    table(data, column_widths: {0 => 10, 1 => 130, 2 => 5, 3 => 20, 4 => 120})
+    table(data, width: 530, column_widths: {0 => 10, 1 => 130, 2 => 5, 3 => 20, 4 => 120})
 
 
   end
 
   def pics
     pic = "public/#{@insp.pics.second.url}"
-    table([["巡查照片：",{image: pic, fit:[230,230], position: :center, colspan: 6}]],width: 527.7, column_widths: {0 => 70})
+    table([["巡查照片：",{image: pic, fit:[230,230], position: :center, colspan: 6}]],width: 530, column_widths: {0 => 70})
   end
   def crew
     data = [
@@ -78,7 +78,7 @@ class OceanInspectPdf < Prawn::Document
       ["巡查人員：",{content: "#{Staff.find(@insp.leader).name} 、 #{@insp.crew}", colspan: 6}],
       ["船長：",{content: "#{Staff.find(@insp.captain).name}", colspan: 6}]
     ]
-    table(data, width: 527.7, column_widths: {0 => 70})
+    table(data, width: 530, column_widths: {0 => 70})
   end
   def submit
     text "陳核" ,size: 20, leading: 5
@@ -86,7 +86,7 @@ class OceanInspectPdf < Prawn::Document
     data = [
       [{content: "紀錄：", size: 15, border_width: 2},{content: "主管：", size: 15, height: 40, border_width: 2}]
     ]
-    table(data, width: 527.7)
+    table(data, width: 530)
   end
 
 end

@@ -9,78 +9,73 @@
   wday = "六" if wday_i === 6
   id = @ocean_inspect.year+@ocean_inspect.month+@ocean_inspect.day
 %>
-<div class="col-md-10 offset-md-1">
+<div class="col-xs-12 p-a-0">
   <h2 class="text-xs-center">澎湖南方四島國家公園海洋巡護紀錄表</h2>
   <hr>
-  <div class="col-lg-6 col-xl-3" id="time">
-    <p><span class="font-weight-bold p-x-0">日期： </span> <%= @ocean_inspect.month %> 月 <%= @ocean_inspect.day %> 日  |  星期<%= wday %></p>
-    <p><span class="font-weight-bold p-x-0">進出港時間：</span> <%= @ocean_inspect.s_time %> - <%= @ocean_inspect.e_time %></p>
+  <div class="col-lg-6 col-xl-3 p-a-0" id="time">
+    <p><span class="font-weight-bold p-a-0">日期： </span> <%= @ocean_inspect.month %> 月 <%= @ocean_inspect.day %> 日  |  星期<%= wday %></p>
+    <p><span class="font-weight-bold p-a-0">進出港時間：</span> <%= @ocean_inspect.s_time %> - <%= @ocean_inspect.e_time %></p>
   </div>
-  <div class="col-lg-6 col-xl-4" id="tide">
+  <div class="col-lg-6 col-xl-4 p-a-0" id="tide">
     <% #拆分潮汐
      tide = WeatherMonthly.find(id).tide.gsub!(/[\[\]\"]/, "").split(",")
     %>
-    <p class="p-x-0"><span class="font-weight-bold">潮汐時間：</span>&nbsp;&nbsp;<%= tide[0] %>&nbsp; | &nbsp;<%= tide[1] %></p>
-    <p class="p-x-0"><span class="font-weight-bold"> &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;</span>&nbsp;&nbsp;<%= tide[2] %> &nbsp;| &nbsp;<%= tide[3] %></p>
+    <p class="p-a-0"><span class="font-weight-bold">潮汐時間：</span>&nbsp;&nbsp;<%= tide[0] %>&nbsp; | &nbsp;<%= tide[1] %></p>
+    <p class="p-a-0"><span class="font-weight-bold"> &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;</span><%= tide[2] %> &nbsp;| &nbsp;<%= tide[3] %></p>
   </div>
-  <div class="col-lg-12 col-xl-4" id="weather">
-    <div class="section-1 col-lg-6 p-x-0">
-      <p><span class="font-weight-bold p-x-0">天氣：</span> <%= WeatherMonthly.find(id).weather %></p>
-      <p><span class="font-weight-bold p-x-0">風力：</span> <%= WeatherMonthly.find(id).wdlv %> 級</p>
+  <div class="col-lg-12 col-xl-4 p-a-0" id="weather">
+    <div class="section-1 col-lg-6 p-a-0">
+      <p><span class="font-weight-bold p-a-0">天氣：</span> <%= WeatherMonthly.find(id).weather %></p>
+      <p><span class="font-weight-bold p-a-0">風力：</span> <%= WeatherMonthly.find(id).wdlv %> 級</p>
     </div>
-    <div class="section2 col-lg-6 p-x-0">
-      <p><span class="font-weight-bold">風向：</span> <%= WeatherMonthly.find(id).wdir %> </p>
-      <p><span class="font-weight-bold ">浪高：</span> <%= WeatherMonthly.find(id).wave %> 米</p>
+    <div class="section2 col-lg-6 p-a-0">
+      <p><span class="font-weight-bold p-a-0">風向：</span> <%= WeatherMonthly.find(id).wdir %> </p>
+      <p><span class="font-weight-bold p-a-0">浪高：</span> <%= WeatherMonthly.find(id).wave %> 米</p>
     </div>
   </div>
-  <div class="col-lg-12" id="location">
+  <div class="col-lg-12 p-a-0" id="location">
     <hr>
-    <p class="font-weight-bold ">巡查地點：</p>
+    <p class="font-weight-bold p-a-0">巡查地點：</p>
     <p><%= @ocean_inspect.location %></p>
   </div>
-  <div class="col-lg-12 col-xl-4" id="oil">
+  <div class="col-lg-12 col-xl-4 p-a-0" id="oil">
     <hr>
-    <p class="col-lg-6 col-xl-12 p-x-0"><span class="font-weight-bold">航程： </span><%= @ocean_inspect.distance %> 浬 &nbsp;/ &nbsp;<span class="font-weight-bold">油耗：</span> <%= @ocean_inspect.distance.to_f * Boat.find(@ocean_inspect.boat_id).fuelConsumption.to_f %> 公升</p>
-    <p class="col-lg-6 col-xl-12 p-x-0"><span class="font-weight-bold">加油： </span><%= @ocean_inspect.gas %> <%= "公升" if !@ocean_inspect.gas.nil? %></p>
+    <p class="col-lg-6 col-xl-12 p-a-0"><span class="font-weight-bold">航程： </span><%= @ocean_inspect.distance %> 浬 &nbsp;/ &nbsp;<span class="font-weight-bold">油耗：</span> <%= @ocean_inspect.distance.to_f * Boat.find(@ocean_inspect.boat_id).fuelConsumption.to_f %> 公升</p>
+    <p class="col-lg-6 col-xl-12 p-a-0"><span class="font-weight-bold">加油： </span><%= @ocean_inspect.gas %> <%= "公升" if !@ocean_inspect.gas.nil? %></p>
   </div>
-  <div class="col-lg-12 col-xl-8" id="work">
+  <div class="col-lg-12 col-xl-8 p-a-0" id="work">
     <hr>
-    <p class="font-weight-bold">執行項目</p>
+    <p class="font-weight-bold">執行項目：</p>
     <p><%= @ocean_inspect.work_items %></p>
   </div>
-  <div class="col-lg-12" id="diary">
+  <div class="col-lg-12 p-a-0" id="diary">
     <hr>
-    <p class="font-weight-bold">巡查紀事</p>
+    <p class="font-weight-bold p-a-0">巡查紀事：</p>
     <%= @ocean_inspect.diary.html_safe %>
   </div>
-  <div class="col-lg-12" id="pic">
+  <div class="col-lg-12 p-a-0" id="pic">
     <hr>
-    <p class="font-weight-bold">巡查路線 / 照片</p>
+    <p class="font-weight-bold p-a-0">巡查路線 / 照片</p>
     <% @ocean_inspect.pics.each do |p|%>
       <%= image_tag p.url, class: "img-fluid m-x-auto" %>
       <hr>
     <% end %>
-    <p class="text-xs-center"><%= ("備註：" + @ocean_inspect.note) if !@ocean_inspect.note.nil? %></p>
+    <p class="text-xs-center p-a-0"><%= ("備註：" + @ocean_inspect.note) if !@ocean_inspect.note.nil? %></p>
   </div>
-  <div class="col-lg-12" id="onboat">
+  <div class="col-lg-12 p-a-0" id="onboat">
     <p class="font-weight-bold">巡查人員：</p>
     <p><%= Staff.find(@ocean_inspect.leader).name %> 、 <%= @ocean_inspect.crew %></p>
   </div>
-  <div class="col-lg-12" id="boat">
+  <div class="col-lg-12 p-a-0" id="boat">
     <hr>
     <p class="col-lg-6 p-x-0"><span class="font-weight-bold">船長：</span> <%= Staff.find(@ocean_inspect.captain).name %></p>
     <p class="col-lg-6 p-x-0"><span class="font-weight-bold">使用船艇：</span> <%=  Boat.find(@ocean_inspect.boat_id).name%></p>
   </div>
-  <div class="col-lg-12" id="stamp">
-    <hr>
-    <h4 class="font-weight-bold col-lg-12 p-x-0">陳核：</h4>
-    <br>
-    <br>
-    <p class="font-weight-bold col-lg-6 p-x-0">紀錄：</p>
-    <p class="font-weight-bold col-lg-6 p-x-0">主管：</p>
+  <div id="controll" class="col-lg-12 p-a-0 btn-group" role="group">
+    <div class="text-xs-right " >
+      <%= link_to("編輯紀錄表", edit_ocean_inspect_path(params[:id]), class: "btn btn-outline-danger m-b-2") %>
+      <%= link_to "輸出pdf報表", ocean_inspect_path(params[:id],format: "pdf"), class: "btn btn-outline-primary  m-b-2" %>
+    </div>
   </div>
-  <div id="controll" class="col-lg-12">
-    <%= link_to "輸出pdf報表", ocean_inspect_path(params[:id],format: "pdf"), class: "btn btn-primary btn-sm pull-xs-right m-b-2" %>
-    <%= link_to("編輯紀錄表", edit_ocean_inspect_path(params[:id]), class: "btn btn-primary btn-sm pull-xs-right m-b-2") %>
-  </div>
+  <p></p>
 <div>

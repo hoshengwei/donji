@@ -14,9 +14,9 @@ class OceanInspectsController < ApplicationController
       format.html
       format.pdf do
         pdf = OceanInspectPdf.new(@ocean_inspect)
-        send_data pdf.render, filename: "#{@ocean_inspect.year+@ocean_inspect.month+@ocean_inspect.day}海域巡查紀錄報表.pdf",
-                              type: "application/pdf",
-                              disposition: "inline"
+        send_data pdf.render, filename: "澎湖南方四島海洋巡護紀錄表#{@ocean_inspect.year+@ocean_inspect.month+@ocean_inspect.day}.pdf",
+                              type: "application/pdf"
+
 
 
       end
@@ -39,7 +39,7 @@ class OceanInspectsController < ApplicationController
 
     respond_to do |format|
       if @ocean_inspect.save
-        format.html { redirect_to @ocean_inspect, notice: 'Ocean inspect was successfully created.' }
+        format.html { redirect_to @ocean_inspect, notice: '海域巡查紀錄新建完成～' }
         format.json { render :show, status: :created, location: @ocean_inspect }
       else
         format.html { render :new }
@@ -53,7 +53,7 @@ class OceanInspectsController < ApplicationController
   def update
     respond_to do |format|
       if @ocean_inspect.update(ocean_inspect_params)
-        format.html { redirect_to @ocean_inspect, notice: 'Ocean inspect was successfully updated.' }
+        format.html { redirect_to @ocean_inspect, notice: '海域巡查紀錄更新完成～' }
         format.json { render :show, status: :ok, location: @ocean_inspect }
       else
         format.html { render :edit }
@@ -67,7 +67,7 @@ class OceanInspectsController < ApplicationController
   def destroy
     @ocean_inspect.destroy
     respond_to do |format|
-      format.html { redirect_to ocean_inspects_url, notice: 'Ocean inspect was successfully destroyed.' }
+      format.html { redirect_to ocean_inspects_url, notice: '已刪除該筆海域巡查紀錄' }
       format.json { head :no_content }
     end
   end

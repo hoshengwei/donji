@@ -1,53 +1,54 @@
-<div class="container">
-  <div class="row">
-  <h2 class="Display-4 text-center">新增海域巡查紀錄</h2>
-  <hr>
-  <%= simple_form_for(@ocean_inspect) do |f| %>
-    <%= f.error_notification %>
-    <div class="form-inputs col-xl-12">
-      <div class="col-xl-5">
-        <div id="time" class="col-xl-12 ">
-          <%= f.input :date, label: '巡查日期',wrapper_html:{ class: 'col-xl-6 col-lg-3'} %>
-          <%= f.input :s_time, label: '出航時間' , wrapper_html:{ class: 'col-xl-3 col-lg-2'} %>
-          <%= f.input :e_time, label: '返航時間' , wrapper_html:{ class: 'col-xl-3 col-lg-2'}%>
-        </div>
-        <div id="boat" class="col-xl-12">
-          <%= f.input :boat_id, collection: Boat.all, label: '使用船隻', input_html: { class: "custom-select"} ,wrapper_html:{ class: 'col-xl-6 col-lg-3'}%>
-          <%= f.input :captain, collection: Staff.where("role ='船公司'"), label: '船長', input_html: { class: "custom-select" }, wrapper_html:{ class: 'col-xl-6 col-lg-2'}%>
-          <%= f.input :distance, label: '航行海浬' ,wrapper_html:{ class: 'col-xl-4 col-lg-3'}%>
-          <%= f.input :gas ,label: '添加汽油(L)',wrapper_html:{ class: 'col-xl-4 col-lg-3'} %>
-          <%= f.input :oil, label: '添加機油(L)', wrapper_html:{ class: 'col-xl-4 col-lg-3'} %>
-        </div>
-        <div id="work" class="col-xl-12">
-          <%= f.input :leader, collection: Staff.where("role ='國家公園'"), label: '領隊', input_html: { class: "custom-select" }, wrapper_html:{ class: 'col-xl-4 col-lg-3'}%>
-          <%= f.input :crew, as: :check_boxes, collection: Staff.all, label: '搭載人員',value_method: :name, label_html: { class: "form-check" },wrapper_html:{ class: 'col-xl-8 col-lg-4'}%>
-          <%= f.input :location, as: :check_boxes, collection: Useful.where("catalog ='巡查海域'"), value_method: :name, label: '巡查海域',label_html: { class: "form-check" },wrapper_html:{ class: 'col-xl-12 col-lg-4'} %>
-          <%= f.input :work_items, as: :check_boxes, collection: Useful.where("catalog ='工作項目'"), label: '工作項目',value_method: :name, label_html: { class: "form-check" } ,wrapper_html:{ class: 'col-xl-12 col-lg-4'} %>
-        </div>
-      </div>
-      <div class="col-xl-7 col-lg-12">
-        <div id="text">
-          <%= tinymce %>
-          <%= f.input :diary  ,label: '巡查記事',input_html: {class: "tinymce", rows: 8 }%>
-          <%= f.input :note ,label: '備註事項'%>
-        </div>
-        <dic id="pic">
-          <%= f.input :pics, label:'附加圖片' ,label_html: { class: "custom-file"} do %>
-            <%= f.file_field :pics, multiple: true ,class: "form-control-file btn-sm"%>
-            <%= f.hidden_field :pics_cache %>
-          <% end %>
-        </dic>
-      </div>
-    </div>
-    <div class="form-actions col-xs-12">
-      <hr>
-      <%= f.button :submit,  "新建海域巡查紀錄", class: "btn btn-primary btn-sm pull-xs-right" , data: { disable_with: "建立中..." }%>
+<h2 class="Display-4 text-center p-x-1">新增海域巡查紀錄</h2>
+<hr>
+<%= simple_form_for(@ocean_inspect) do |f| %>
+  <% if f.error_notification != nil %>
+    <div class="alert alert-warning alert-dismissible fade in" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <%= f.error_notification %>
     </div>
   <% end %>
-
+  <div class="form-inputs col-xl-12 p-x-0">
+    <div class="col-xl-5 p-x-0">
+      <div id="time" class="col-xl-12 p-x-0">
+        <%= f.input :date, label: '巡查日期',wrapper_html:{ class: 'col-xl-6 col-lg-3'} %>
+        <%= f.input :s_time, label: '出航時間' , wrapper_html:{ class: 'col-xl-3 col-lg-2'} %>
+        <%= f.input :e_time, label: '返航時間' , wrapper_html:{ class: 'col-xl-3 col-lg-2'}%>
+      </div>
+      <div id="boat" class="col-xl-12 p-x-0">
+        <%= f.input :boat_id, collection: Boat.all, label: '使用船隻', input_html: { class: "custom-select"} ,wrapper_html:{ class: 'col-xl-6 col-lg-3'}%>
+        <%= f.input :captain, collection: Staff.where("role ='船公司'"), label: '船長', input_html: { class: "custom-select" }, wrapper_html:{ class: 'col-xl-6 col-lg-2'}%>
+        <%= f.input :distance, label: '航行海浬' ,wrapper_html:{ class: 'col-xl-4 col-lg-3'}%>
+        <%= f.input :gas ,label: '添加汽油(L)',wrapper_html:{ class: 'col-xl-4 col-lg-3'} %>
+        <%= f.input :oil, label: '添加機油(L)', wrapper_html:{ class: 'col-xl-4 col-lg-3'} %>
+      </div>
+      <div id="work" class="col-xl-12 p-x-0">
+        <%= f.input :leader, collection: Staff.where("role ='國家公園'"), label: '領隊', input_html: { class: "custom-select" }, wrapper_html:{ class: 'col-xl-4 col-lg-3'}%>
+        <%= f.input :crew, as: :check_boxes, collection: Staff.all, label: '搭載人員',value_method: :name, label_html: { class: "form-check" },wrapper_html:{ class: 'col-xl-8 col-lg-4'}%>
+        <%= f.input :location, as: :check_boxes, collection: Useful.where("catalog ='巡查海域'"), value_method: :name, label: '巡查海域',label_html: { class: "form-check" },wrapper_html:{ class: 'col-xl-12 col-lg-4'} %>
+        <%= f.input :work_items, as: :check_boxes, collection: Useful.where("catalog ='工作項目'"), label: '工作項目',value_method: :name, label_html: { class: "form-check" } ,wrapper_html:{ class: 'col-xl-12 col-lg-4'} %>
+      </div>
+    </div>
+    <div class="col-xl-7 col-lg-12">
+      <div id="text">
+        <%= tinymce %>
+        <%= f.input :diary  ,label: '巡查記事',input_html: {class: "tinymce", rows: 8 }%>
+        <%= f.input :note ,label: '備註事項'%>
+      </div>
+      <dic id="pic">
+        <%= f.input :pics, label:'附加圖片' ,label_html: { class: "custom-file"} do %>
+          <%= f.file_field :pics, multiple: true ,class: "form-control-file btn-sm"%>
+          <%= f.hidden_field :pics_cache %>
+        <% end %>
+      </dic>
+    </div>
   </div>
-</div>
-
+  <div class="form-actions col-xs-12">
+    <hr>
+    <%= f.button :submit,  "新建海域巡查紀錄", class: "btn btn-primary pull-xs-right  m-b-2" , data: { disable_with: "新建中..." }%>
+  </div>
+<% end %>
 
 <script>
   // The date picker (read the docs)
@@ -55,5 +56,4 @@
 formatSubmit: false})
   $('#ocean_inspect_s_time').pickatime({format: 'HH:i',formatSubmit: false})
   $('#ocean_inspect_e_time').pickatime({format: 'HH:i',formatSubmit: false})
-
 </script>
