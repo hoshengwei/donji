@@ -16,15 +16,26 @@ class OceanInspect < ApplicationRecord
       self.work_items[0] = ""
       self.work_items.gsub!(/,/, " 、")
     end
-
-    self.year = self.date.split("-")[0].to_i-1911
-    self.month = self.date.split("-")[1]
-    self.day = self.date.split("-")[2]
+    @date = self.date
+    self.year = @date.split("-")[0].to_i-1911
+    self.month = @date.split("-")[1]
+    self.day = @date.split("-")[2]
 
   end
 
 
   mount_uploaders :pics, ImageUploader
   serialize :pics
+
+  # Validation
+  validates :date, presence: true
+  validates :s_time, presence: true
+  validates :e_time, presence: true
+  validates :boat_id, presence: true
+  validates :captain, presence: true
+  validates :distance, presence: true
+  validates :leader, presence: true
+
+  
 
 end

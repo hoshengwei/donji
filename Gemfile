@@ -40,6 +40,7 @@ gem 'tinymce-rails'
 gem 'hamlit'
 gem 'prawn'
 gem 'prawn-table'
+gem "rails-i18n"
 # Use Capistrano for deployment
 gem 'capistrano-rails', group: :development
 

@@ -9,7 +9,8 @@
   wday = "六" if wday_i === 6
   id = @ocean_inspect.year+@ocean_inspect.month+@ocean_inspect.day
 %>
-<div class="col-xs-12 p-a-0">
+<p></p>
+<div class="col-md-10 offset-md-1 p-a-0">
   <h2 class="text-xs-center">澎湖南方四島國家公園海洋巡護紀錄表</h2>
   <hr>
   <div class="col-lg-6 col-xl-3 p-a-0" id="time">
@@ -72,9 +73,13 @@
     <p class="col-lg-6 p-x-0"><span class="font-weight-bold">使用船艇：</span> <%=  Boat.find(@ocean_inspect.boat_id).name%></p>
   </div>
   <div id="controll" class="col-lg-12 p-a-0 btn-group" role="group">
-    <div class="text-xs-right " >
-      <%= link_to("編輯紀錄表", edit_ocean_inspect_path(params[:id]), class: "btn btn-outline-danger m-b-2") %>
-      <%= link_to "輸出pdf報表", ocean_inspect_path(params[:id],format: "pdf"), class: "btn btn-outline-primary  m-b-2" %>
+    <hr>
+    <div class="col-md-3">
+      <%= link_to("回報表清單", ocean_inspects_path, class: "btn btn-outline-success") %>
+    </div>
+    <div class="text-xs-right col-md-9" >
+      <%= link_to("編輯紀錄表", edit_ocean_inspect_path(params[:id]), class: "btn btn-outline-danger") %>
+      <%= link_to "輸出PDF報表", ocean_inspect_path(params[:id],format: "pdf"), class: "btn btn-outline-primary" %>
     </div>
   </div>
   <p></p>
