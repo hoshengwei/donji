@@ -1,5 +1,5 @@
 class OceanInspectsController < ApplicationController
-  before_action :set_ocean_inspect, only: [:show, :edit, :update, :destroy]
+  before_action :set_ocean_inspect, only: [:show, :edit, :update, :destroy, :logbooks]
 
   # GET /ocean_inspects
   # GET /ocean_inspects.json
@@ -15,10 +15,21 @@ class OceanInspectsController < ApplicationController
       format.pdf do
         pdf = OceanInspectPdf.new(@ocean_inspect)
         send_data pdf.render, filename: "澎湖南方四島海洋巡護紀錄表#{@ocean_inspect.year+@ocean_inspect.month+@ocean_inspect.day}.pdf",
-                              type: "application/pdf"
+                              type: "application/pdf",
+                              disposition: "inline"
 
 
+      end
+    end
+  end
 
+  def logbooks
+    respond_to do |format|
+      format.pdf do
+        logbooks = LogbooksPdf.new(@ocean_inspect)
+        send_data logbooks.render, filename: "#{@ocean_inspect.year+@ocean_inspect.month+@ocean_inspect.day}航行日誌.pdf",
+                              type: "application/pdf",
+                              disposition: "inline"
       end
     end
   end

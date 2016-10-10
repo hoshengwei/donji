@@ -79,7 +79,21 @@
     </div>
     <div class="text-xs-right col-md-9" >
       <%= link_to("編輯紀錄表", edit_ocean_inspect_path(params[:id]), class: "btn btn-outline-danger") %>
-      <%= link_to "輸出PDF報表", ocean_inspect_path(params[:id],format: "pdf"), class: "btn btn-outline-primary" %>
+      <!-- 多選button 輸出各種不同表單 -->
+      <div class="btn-group  dropup">
+        <button type="button" class="btn btn-outline-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          輸出PDF表單
+        </button>
+        <div class="dropdown-menu">
+          <%= link_to "巡護紀錄表", ocean_inspect_path(params[:id],format: "pdf"), target: '_blank',class: "dropdown-item" %>
+          <%= link_to '航行日誌', logbooks_path(params[:id], format: 'pdf'), target: '_blank', class: "dropdown-item" %>
+          <a class="dropdown-item" href="#">Another action</a>
+          <a class="dropdown-item" href="#">Something else here</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Separated link</a>
+        </div>
+      </div>
+
     </div>
   </div>
   <p></p>
