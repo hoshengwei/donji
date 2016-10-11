@@ -31,13 +31,10 @@ class OceanInspectPdf < Prawn::Document
   end
 
   def ocean_inspect_content  # 報表內容
-    move_down 10
     text "澎湖南方四島國家公園海洋巡護紀錄表", align: :center , size: 30, leading: 5
     move_down 10
     time = "#{@insp.month} 月 #{@insp.day} 日 |  星期(#{@wday})\n\n進出港時間： #{@insp.s_time}-#{@insp.e_time}"
     tide = "#{@tide[0]}  #{@tide[1]}\n\n#{@tide[2]}  #{@tide[3]}"
-    weather = [["天氣：#{@weather.weather}"],["風向：#{@weather.wdir}"]]
-    wave = [["風力：#{@weather.wdlv}級"],["浪高：#{@weather.wave}米"]]
     distance = "#{@insp.distance} 海浬 ｜ #{ Boat.find(@insp.boat_id).fuelConsumption.to_f} 公升"
     oil = "#{@insp.gas}"
     if @insp.gas ==="" || @insp.gas.nil?
@@ -55,12 +52,13 @@ class OceanInspectPdf < Prawn::Document
     map = "public/#{@insp.pics.first.url}"
 
     data = [
-      [{content: time, colspan: 2} ,"\n潮汐時間：",{content: tide, colspan: 2},weather,wave],
+      [{content: time, colspan: 2, rowspan: 2} ,{content: "潮汐時間：",rowspan: 2, valign: :center},{content: tide, colspan: 2, rowspan: 2},"天氣：#{@weather.weather}","風力：#{@weather.wdlv} 級"],
+      ["風向：#{@weather.wdir}","浪高：#{@weather.wave}米"],
       ["巡查地點：",{content: "#{@insp.location}", colspan: 6}],
       ["航程油耗：",{content: distance, colspan: 2},"添加汽油：",{content: oil, colspan: 3}],
       ["執行項目：",{content: "#{@insp.work_items}", colspan: 6}],
       ["巡查紀事：",{content: dd, colspan: 6}],
-      ["航行路線：",{image: map, fit:[230,230], position: :center, colspan: 6}]
+      ["航行路線：",{image: map, fit:[220,180], position: :center, colspan: 6}]
     ]
 
     table(data, width: 530, column_widths: {0 => 10, 1 => 130, 2 => 5, 3 => 20, 4 => 120})
@@ -70,7 +68,7 @@ class OceanInspectPdf < Prawn::Document
 
   def pics
     pic = "public/#{@insp.pics.second.url}"
-    table([["巡查照片：",{image: pic, fit:[230,230], position: :center, colspan: 6}]],width: 530, column_widths: {0 => 70})
+    table([["巡查照片：",{image: pic, fit:[220,180], position: :center, colspan: 6}]],width: 530, column_widths: {0 => 70})
   end
   def crew
     data = [
