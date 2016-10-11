@@ -1,61 +1,74 @@
-<div class="container">
-  <div class="row">
-    <div class="page-header">
-      <p></p>
-      <h2 class="h3">近30日氣象資料<span class="h6">--氣象局資料--</span></h2>
-      <hr>
-    </div>
-
-    <table class="table table-hover table-sm">
-      <thead class="bg-primary">
-        <tr>
-          <th>日期</th>
-          <th class="hidden-xs-down">天氣</th>
-          <th class="hidden-xs-down" data-toggle="tooltip" data-placement="top" data-original-title="單位：°C">氣溫</th>
-          <th data-toggle="tooltip" data-placement="top" data-original-title="單位：m">浪高</th>
-          <th class="hidden-md-down" data-toggle="tooltip" data-placement="top" data-original-title="單位：°C">海溫</th>
-          <th>潮汐時間</th>
-          <th class="hidden-sm-down" data-toggle="tooltip" data-placement="top" data-original-title="單位：mm">累積雨量</th>
-          <th class="hidden-lg-down" data-toggle="tooltip" data-placement="top" data-original-title="單位：hr">降雨時數</th>
-          <th class="hidden-md-down">風向</th>
-          <th data-toggle="tooltip" data-placement="top" data-original-title="單位：m/s">風速</th>
-          <th class="hidden-xs-down" data-toggle="tooltip" data-placement="top" data-original-title="單位：級">風力</th>
-          <th data-toggle="tooltip" data-placement="top" data-original-title="單位：m/s">最大陣風</th>
-          <th class="hidden-lg-down" data-toggle="tooltip" data-placement="top" data-original-title="單位：hPa">海面氣壓</th>
-          <th class="hidden-md-down" data-toggle="tooltip" data-placement="top" data-original-title="單位：km">能見度</th>
-          <th class="hidden-xs-down">數據狀態</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @monthly_reports.each do |report| %>
-          <tr>
-            <td><%= link_to report.month.to_s + '/' + report.day.to_s, weather_path(report) %></td>
-            <td class="hidden-xs-down"><%= report.weather %></td>
-            <td class="hidden-xs-down"><%= report.temp %></td>
-            <td><%= report.wave %></td>
-            <td class="hidden-md-down"><%= report.ocean_temp %></td>
-            <% tide_times = report.tide.split('"') %>
-            <% tide = tide_times[1] +"---------"+ tide_times[3] +"---------"+ tide_times[5] +"---------"+ tide_times[7] +"---------" %>
-            <td><button type="button" class="btn btn-sm btn-outline-primary" data-container="body" data-toggle="popover" title="潮汐時間: <%= report.day %> 號" data-placement="bottom" data-content="<%= tide  %>">點我查看</button></td>
-            <td class="hidden-sm-down" ><%= report.rain %></td>
-            <td class="hidden-lg-down"><%= report.rain_hour %></td>
-            <td class="hidden-md-down"><%= report.wdir %></td>
-            <td><%= report.wdsd %></td>
-            <td class="hidden-xs-down"><%= report.wdlv %></td>
-            <td><%= report.wd_max %></td>
-            <td class="hidden-lg-down"><%= report.pres %></td>
-            <td class="hidden-md-down"><%= report.visb %></td>
-            <td class="hidden-xs-down"><%= report.status %></td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
+<div class="page-header">
+  <p></p>
+  <div class="col-xs-12 col-md-8 col-lg-9 p-x-0">
+    <h2 class="h3">
+      近30日氣象資料<span class="h6">--氣象局資料--</span>
+    </h2>
   </div>
+  <div class="col-xs-12 col-md-4 col-lg-3 p-x-0">
+    <form action="/cwb" accept-charset="UTF-8" method="get">
+      <div class="input-group">
+        <input name="date" id="cwbdate" type="text" class="form-control" placeholder="選擇日期...">
+        <span class="input-group-btn">
+          <button  name="commit" class="btn btn-outline-primary" type="submit">更新！</button>
+        </span>
+      </div>
+    </form>
+  </div>
+  <hr class="col-xs-12 p-a-0">
 </div>
+<table class="table table-hover table-sm">
+  <thead class="bg-primary">
+    <tr>
+      <th>日期</th>
+      <th class="hidden-xs-down">天氣</th>
+      <th class="hidden-xs-down" data-toggle="tooltip" data-placement="top" data-original-title="單位：°C">氣溫</th>
+      <th data-toggle="tooltip" data-placement="top" data-original-title="單位：m">浪高</th>
+      <th class="hidden-md-down" data-toggle="tooltip" data-placement="top" data-original-title="單位：°C">海溫</th>
+      <th>潮汐時間</th>
+      <th class="hidden-sm-down" data-toggle="tooltip" data-placement="top" data-original-title="單位：mm">累積雨量</th>
+      <th class="hidden-lg-down" data-toggle="tooltip" data-placement="top" data-original-title="單位：hr">降雨時數</th>
+      <th class="hidden-md-down">風向</th>
+      <th data-toggle="tooltip" data-placement="top" data-original-title="單位：m/s">風速</th>
+      <th class="hidden-xs-down" data-toggle="tooltip" data-placement="top" data-original-title="單位：級">風力</th>
+      <th data-toggle="tooltip" data-placement="top" data-original-title="單位：m/s">最大陣風</th>
+      <th class="hidden-lg-down" data-toggle="tooltip" data-placement="top" data-original-title="單位：hPa">海面氣壓</th>
+      <th class="hidden-md-down" data-toggle="tooltip" data-placement="top" data-original-title="單位：km">能見度</th>
+      <th class="hidden-xs-down">數據狀態</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @monthly_reports.each do |report| %>
+      <tr>
+        <td><%= link_to report.month.to_s + '/' + report.day.to_s, weather_path(report) %></td>
+        <td class="hidden-xs-down"><%= report.weather %></td>
+        <td class="hidden-xs-down"><%= report.temp %></td>
+        <td><%= report.wave %></td>
+        <td class="hidden-md-down"><%= report.ocean_temp %></td>
+        <% tide_times = report.tide.split('"') %>
+        <% tide = tide_times[1] +"---------"+ tide_times[3] +"---------"+ tide_times[5] +"---------"+ tide_times[7] +"---------" %>
+        <td><button type="button" class="btn btn-sm btn-outline-primary" data-container="body" data-toggle="popover" title="潮汐時間: <%= report.day %> 號" data-placement="bottom" data-content="<%= tide  %>">點我查看</button></td>
+        <td class="hidden-sm-down" ><%= report.rain %></td>
+        <td class="hidden-lg-down"><%= report.rain_hour %></td>
+        <td class="hidden-md-down"><%= report.wdir %></td>
+        <td><%= report.wdsd %></td>
+        <td class="hidden-xs-down"><%= report.wdlv %></td>
+        <td><%= report.wd_max %></td>
+        <td class="hidden-lg-down"><%= report.pres %></td>
+        <td class="hidden-md-down"><%= report.visb %></td>
+        <td class="hidden-xs-down"><%= report.status %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
 
 
-<!-- bootstrap tooltip & popover initialize -->
+
 <script>
+  // bootstrap tooltip & popover initialize
   $(function () { $("[data-toggle='tooltip']").tooltip(); });
   $(function () { $('[data-toggle="popover"]').popover() });
+
+  // The date picker (read the docs)
+  $('#cwbdate').pickadate({format: 'yyyy-mm-dd',formatSubmit: false})
 </script>

@@ -129,4 +129,11 @@ namespace :get_weather do
 
   end
 
+  desc "更新指定日期之氣象局觀測資料"
+  task :cwb, [:date] => :environment do | t, args|
+    require "methods"
+    @date =  args[:date].to_s
+    update_weather_monthly_report(@date)
+  end
+
 end

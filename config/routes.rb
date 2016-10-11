@@ -7,5 +7,5 @@ Rails.application.routes.draw do
   root to:  'ocean_inspects#index'
   resources :weathers
   get 'ocean_inspects/:id/logbooks', to: 'ocean_inspects#logbooks', as: 'logbooks'
-
+  get 'cwb', to: 'weathers#cwb', as: 'cwb'
 end
