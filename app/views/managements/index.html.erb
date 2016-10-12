@@ -1,0 +1,64 @@
+<div class="page-header">
+  <p></p>
+  <h2 class="h3">後台資料管理</h2>
+  <hr>
+</div>
+<div class="content">
+  <div id="staffs" class="col-xs-12 col-sm-6 col-lg-4">
+    <div class="card">
+      <img class="card-img-top img-fluid" src="/imgs/staffs.png" alt="Card image cap">
+      <div class="card-block">
+        <h4 class="card-title">人員管理</h4>
+        <h6 class="card-subtitle text-muted">工作人員名冊分類管理</h6>
+        <hr>
+        <p class="card-text">紀錄所有工作人員資訊以及所屬部門，供查閱資料與動態表單使用。</p>
+      </div>
+      <div class="list-group list-group-flush">
+        <% @staffs.each do |staff| %>
+          <%= link_to "#{staff.name}<span class=' pull-xs-right font-weight-normal text-muted'>#{staff.role}</span>".html_safe, staff_path(staff) ,class: "list-group-item list-group-item-action font-weight-bold"%>
+        <% end %>
+      </div>
+      <div class="card-block">
+        <%= link_to '新增人員名單', new_staff_path , class: "btn btn-primary card-link pull-xs-right" %>
+      </div>
+    </div>
+  </div>
+  <div id="boats" class="col-xs-12 col-sm-6 col-lg-4">
+    <div class="card">
+      <img class="card-img-top img-fluid" src="/imgs/boats.jpg" alt="Card image cap">
+      <div class="card-block">
+        <h4 class="card-title">船隻管理</h4>
+        <h6 class="card-subtitle text-muted">管理船隻相關資訊</h6>
+        <hr>
+        <p class="card-text">紀錄所有船隻相關資訊，方便進行船隻管理紀錄與油料推算管理。</p>
+      </div>
+      <div class="list-group list-group-flush">
+        <% @boats.each do |boat| %>
+          <%= link_to "#{boat.name}<span class=' pull-xs-right font-weight-normal text-muted'>油耗： #{boat.fuelConsumption} 升/浬</span>".html_safe, boat_path(boat) ,class: "list-group-item list-group-item-action font-weight-bold"%>
+        <% end %>
+      </div>
+      <div class="card-block">
+        <%= link_to '新增船隻清冊', new_boat_path , class: "btn btn-primary card-link pull-xs-right" %>
+      </div>
+    </div>
+  </div>
+  <div id="staffs" class="col-xs-12 col-sm-6 col-lg-4">
+    <div class="card">
+      <img class="card-img-top img-fluid" src="/imgs/usefuls.png" alt="Card image cap">
+      <div class="card-block">
+        <h4 class="card-title">常用詞彙</h4>
+        <h6 class="card-subtitle text-muted">定型化文字分類管理</h6>
+        <hr>
+        <p class="card-text">設定常用文字，如巡查海域、工作項目等，避免重複輸入之麻煩。</p>
+      </div>
+      <div class="list-group list-group-flush">
+        <% @usefuls.each do |useful| %>
+          <%= link_to "#{useful.name}<span class=' pull-xs-right font-weight-normal text-muted'>#{useful.catalog}</span>".html_safe, useful_path(useful) ,class: "list-group-item list-group-item-action font-weight-bold"%>
+        <% end %>
+      </div>
+      <div class="card-block">
+        <%= link_to '新增常用詞彙', new_useful_path , class: "btn btn-primary card-link pull-xs-right" %>
+      </div>
+    </div>
+  </div>
+</div>
