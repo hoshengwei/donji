@@ -1,20 +1,10 @@
-<% #計算星期幾
-  wday_i = @ocean_inspect.date.to_date.wday.to_i
-  wday = "日" if wday_i === 0
-  wday = "一" if wday_i === 1
-  wday = "二" if wday_i === 2
-  wday = "三" if wday_i === 3
-  wday = "四" if wday_i === 4
-  wday = "五" if wday_i === 5
-  wday = "六" if wday_i === 6
-  id = @ocean_inspect.year+@ocean_inspect.month+@ocean_inspect.day
-%>
+<% id = @ocean_inspect.year+@ocean_inspect.month+@ocean_inspect.day %>
 <p></p>
 <div class="col-md-10 offset-md-1 p-a-0">
   <h2 class="text-xs-center">澎湖南方四島國家公園海洋巡護紀錄表</h2>
   <hr>
   <div class="col-lg-6 col-xl-3 p-a-0" id="time">
-    <p><span class="font-weight-bold p-a-0">日期： </span> <%= @ocean_inspect.month %> 月 <%= @ocean_inspect.day %> 日  |  星期<%= wday %></p>
+    <p><span class="font-weight-bold p-a-0">日期： </span> <%= @ocean_inspect.month %> 月 <%= @ocean_inspect.day %> 日  |  星期<%= @ocean_inspect.wday %></p>
     <p><span class="font-weight-bold p-a-0">進出港時間：</span> <%= @ocean_inspect.s_time %> - <%= @ocean_inspect.e_time %></p>
   </div>
   <div class="col-lg-6 col-xl-4 p-a-0" id="tide">
@@ -22,7 +12,7 @@
      tide = WeatherMonthly.find(id).tide.gsub!(/[\[\]\"]/, "").split(",")
     %>
     <p class="p-a-0"><span class="font-weight-bold">潮汐時間：</span>&nbsp;&nbsp;<%= tide[0] %>&nbsp; | &nbsp;<%= tide[1] %></p>
-    <p class="p-a-0"><span class="font-weight-bold"> &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;</span><%= tide[2] %> &nbsp;| &nbsp;<%= tide[3] %></p>
+    <p class="p-a-0"><span class="font-weight-bold"> &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;</span><%= tide[2] %> &nbsp;| &nbsp;<%= tide[3] %></p>
   </div>
   <div class="col-lg-12 col-xl-4 p-a-0" id="weather">
     <div class="section-1 col-lg-6 p-a-0">
@@ -97,4 +87,3 @@
     </div>
   </div>
   <p></p>
-<div>

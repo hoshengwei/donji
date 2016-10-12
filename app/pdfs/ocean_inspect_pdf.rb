@@ -15,16 +15,8 @@ class OceanInspectPdf < Prawn::Document
   end
 
   def methods
-    wday_i = @insp.date.to_date.wday.to_i
-    wday = "日" if wday_i === 0
-    wday = "一" if wday_i === 1
-    wday = "二" if wday_i === 2
-    wday = "三" if wday_i === 3
-    wday = "四" if wday_i === 4
-    wday = "五" if wday_i === 5
-    wday = "六" if wday_i === 6
     @id = @insp.year+@insp.month+@insp.day
-    @wday = wday
+    @wday = @insp.wday
     @weather = WeatherMonthly.find(@id)
     @tide = @weather.tide.gsub!(/[\[\]\"]/, "").split(",")
 
@@ -35,7 +27,7 @@ class OceanInspectPdf < Prawn::Document
     move_down 10
     time = "#{@insp.month} 月 #{@insp.day} 日 |  星期(#{@wday})\n\n進出港時間： #{@insp.s_time}-#{@insp.e_time}"
     tide = "#{@tide[0]}  #{@tide[1]}\n\n#{@tide[2]}  #{@tide[3]}"
-    distance = "#{@insp.distance} 海浬 ｜ #{ Boat.find(@insp.boat_id).fuelConsumption.to_f} 公升"
+    distance = "#{@insp.distance} 海浬 ｜ #{@insp.gas_consumption} 公升"
     oil = "#{@insp.gas}"
     if @insp.gas ==="" || @insp.gas.nil?
       oil = "0"
