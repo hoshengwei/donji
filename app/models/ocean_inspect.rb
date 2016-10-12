@@ -1,6 +1,16 @@
 class OceanInspect < ApplicationRecord
 
   before_save do
+    wday_i = self.date.to_date.wday.to_i
+    @wday = "日" if wday_i === 0
+    @wday = "一" if wday_i === 1
+    @wday = "二" if wday_i === 2
+    @wday = "三" if wday_i === 3
+    @wday = "四" if wday_i === 4
+    @wday = "五" if wday_i === 5
+    @wday = "六" if wday_i === 6
+    self.wday = @wday
+
     if attribute_present?("crew")
       self.crew.gsub!(/[\[\]\"]/, "")
       self.crew[0] = ""
@@ -35,7 +45,4 @@ class OceanInspect < ApplicationRecord
   validates :captain, presence: true
   validates :distance, presence: true
   validates :leader, presence: true
-
-  
-
 end
