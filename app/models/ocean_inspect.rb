@@ -11,6 +11,8 @@ class OceanInspect < ApplicationRecord
     @wday = "六" if wday_i === 6
     self.wday = @wday
 
+    self.gas_consumption = self.distance.to_f * Boat.find(self.boat_id).fuelConsumption.to_f
+
     if attribute_present?("crew")
       self.crew.gsub!(/[\[\]\"]/, "")
       self.crew[0] = ""
@@ -45,4 +47,5 @@ class OceanInspect < ApplicationRecord
   validates :captain, presence: true
   validates :distance, presence: true
   validates :leader, presence: true
+  validates :diary, presence: true
 end

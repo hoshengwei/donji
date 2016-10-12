@@ -30,7 +30,7 @@
       <div id="text">
         <%= tinymce %>
         <%= f.input :diary  ,label: '巡查記事 <span class="small"><務必使用數字項次排序></span>'.html_safe,input_html: {class: "tinymce", rows: 8 }%>
-        <%= f.input :note ,label: '備註事項'%>
+        <%= f.input :note ,label: '備註事項', placeholder: "避颱..."%>
       </div>
       <dic id="pic">
         <%= f.input :pics, label:'附加圖片 <span class="small"> <第一張須為巡查地圖，巡查照片為第二張，其餘只於網頁顯示，報表中不印出></span>'.html_safe ,label_html: { class: "custom-file"} do %>

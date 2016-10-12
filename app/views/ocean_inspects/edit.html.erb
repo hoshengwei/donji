@@ -15,22 +15,23 @@
       <div id="boat" class="col-xl-12 p-x-0">
         <%= f.input :boat_id, collection: Boat.all, label: '使用船隻', input_html: { class: "custom-select"} ,wrapper_html:{ class: 'col-xl-6 col-lg-3'}%>
         <%= f.input :captain, collection: Staff.where("role ='船公司'"), label: '船長', input_html: { class: "custom-select" }, wrapper_html:{ class: 'col-xl-6 col-lg-2'}%>
-        <%= f.input :distance, label: '航行海浬' ,wrapper_html:{ class: 'col-xl-4 col-lg-2'}%>
-        <%= f.input :gas ,label: '添加汽油(L)',wrapper_html:{ class: 'col-xl-4 col-lg-2'} %>
-        <%= f.input :oil, label: '添加機油(L)', wrapper_html:{ class: 'col-xl-4 col-lg-2'} %>
+        <%= f.input :distance, label: '航行海浬' ,wrapper_html:{ class: 'col-xl-3 col-lg-3'}%>
+        <%= f.input :gas_consumption ,label: '汽油消耗(L)',wrapper_html:{ class: 'col-xl-3 col-lg-3'} %>
+        <%= f.input :gas ,label: '添加汽油(L)',wrapper_html:{ class: 'col-xl-3 col-lg-3'} %>
+        <%= f.input :oil, label: '添加機油(L)', wrapper_html:{ class: 'col-xl-3 col-lg-3'} %>
       </div>
       <div id="work" class="col-xl-12 p-x-0">
         <%= f.input :leader, collection: Staff.where("role ='國家公園'"), label: '領隊', input_html: { class: "custom-select" }, wrapper_html:{ class: 'col-xl-4 col-lg-2'}%>
-        <%= f.input :crew, label: '搭載人員  <span class="small"> <不含領隊></span>'.html_safe,wrapper_html:{ class: 'col-xl-8 col-lg-4'}%>
-        <%= f.input :location, label: '巡查海域',wrapper_html:{ class: 'col-xl-12 col-lg-6'} %>
-        <%= f.input :work_items, label: '工作項目',wrapper_html:{ class: 'col-xl-12 col-lg-6'} %>
+        <%= f.input :crew, label: '搭載人員 <span class="small"> <不含領隊></span>'.html_safe, wrapper_html:{ class: 'col-xl-8 col-lg-6'}%>
+        <%= f.input :location, label: '巡查海域',wrapper_html:{ class: 'col-xl-12 col-lg-4'} %>
+        <%= f.input :work_items, label: '工作項目', wrapper_html:{ class: 'col-xl-12 col-lg-12'} %>
       </div>
     </div>
     <div class="col-xl-7 col-lg-12">
       <div id="text">
         <%= tinymce %>
         <%= f.input :diary  ,label: '巡查記事 <span class="small"> <務必使用數字項次排序></span>'.html_safe,input_html: {class: "tinymce", rows: 8 }%>
-        <%= f.input :note ,label: '備註事項'%>
+        <%= f.input :note ,label: '備註事項', placeholder: "避颱..."%>
       </div>
       <dic id="pic">
         <%= f.input :pics, label:'附加圖片  <span class="small"> <第一張須為巡查地圖，巡查照片為第二張，其餘只於網頁顯示，報表中不印出></span>'.html_safe ,label_html: { class: "custom-file"} do %>
@@ -51,7 +52,7 @@
 
 <script>
   // The date picker (read the docs)
-  $('#ocean_inspect_date').pickadate({format: 'yyyy-mm-dd',
+  $('#ocean_inspect_date').pickadate({format: 'yyyy-mm-dd',max: true,
 formatSubmit: false})
   $('#ocean_inspect_s_time').pickatime({format: 'HH:i',formatSubmit: false})
   $('#ocean_inspect_e_time').pickatime({format: 'HH:i',formatSubmit: false})
