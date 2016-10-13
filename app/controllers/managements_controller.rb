@@ -1,12 +1,14 @@
 class ManagementsController < ApplicationController
-  before_action :set_boat, only: [:show, :edit, :update, :destroy]
 
 
   def index
     @boats = Boat.all
     @staffs = Staff.all
     @usefuls = Useful.all
+    @staff = Staff.new
+    @boat = Boat.new
   end
+
 
   # # GET /boats/1
   # # GET /boats/1.json
@@ -64,8 +66,6 @@ class ManagementsController < ApplicationController
 
 private
   # Use callbacks to share common setup or constraints between actions.
-  def set_boat
-    @boat = Boat.find(params[:id])
-  end
+
 
 end

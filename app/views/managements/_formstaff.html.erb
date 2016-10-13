@@ -1,0 +1,17 @@
+<div class="modal-body">
+  <%= simple_form_for(@staff) do |f| %>
+    <%= f.error_notification %>
+
+    <div class="form-inputs">
+      <%= f.input :name, label: "姓名：", placeholder: "兩津勘吉" %>
+      <%= f.input :title, label: "職稱", placeholder: "大猩猩" %>
+      <%= f.input :role, collection: [:國家公園, :警察小隊, :船公司] ,label: "所屬單位",placeholder: "偵探事務所",input_html: { class: "custom-select"}%>
+      <%= f.input :phone , label: "聯絡電話",placeholder: "0987-654-321"%>
+      <%= f.input :email, label: "電子信箱", placeholder: "example@example.com" %>
+      <div class="modal-footer">
+        <%= f.button :submit,"儲存資料",class: "btn btn-primary pull-xs-right" %>
+        <%= link_to "返回後台", managements_path, class: "btn btn-secondary pull-xs-right",type: "button" %>
+      </div>
+    </div>
+  <% end %>
+</div>

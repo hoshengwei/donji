@@ -1,21 +1,14 @@
 class StaffsController < ApplicationController
   before_action :set_staff, only: [:show, :edit, :update, :destroy]
 
-  # GET /staffs
-  # GET /staffs.json
-  def index
-    @staffs = Staff.all
-  end
 
   # GET /staffs/1
   # GET /staffs/1.json
   def show
   end
 
-  # GET /staffs/new
-  def new
-    @staff = Staff.new
-  end
+
+
 
   # GET /staffs/1/edit
   def edit
@@ -28,7 +21,7 @@ class StaffsController < ApplicationController
 
     respond_to do |format|
       if @staff.save
-        format.html { redirect_to @staff, notice: 'Staff was successfully created.' }
+        format.html { redirect_to @staff, notice: '人員名單已新增' }
         format.json { render :show, status: :created, location: @staff }
       else
         format.html { render :new }
@@ -42,7 +35,7 @@ class StaffsController < ApplicationController
   def update
     respond_to do |format|
       if @staff.update(staff_params)
-        format.html { redirect_to @staff, notice: 'Staff was successfully updated.' }
+        format.html { redirect_to @staff, notice: '人員名單已更新' }
         format.json { render :show, status: :ok, location: @staff }
       else
         format.html { render :edit }

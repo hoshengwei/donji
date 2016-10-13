@@ -1,0 +1,14 @@
+<div class="modal-body">
+  <%= simple_form_for(@boat) do |f| %>
+    <%= f.error_notification %>
+
+    <div class="form-inputs">
+      <%= f.input :name, label: "船隻名稱：", placeholder: "梅莉號" %>
+      <%= f.input :fuelConsumption, label: "油耗(升/浬)：", placeholder: "100" %>
+      <div class="modal-footer">
+        <%= f.button :submit,"儲存資料",class: "btn btn-primary pull-xs-right" %>
+        <%= link_to "返回後台", managements_path, class: "btn btn-secondary pull-xs-right",type: "button" %>
+      </div>
+    </div>
+  <% end %>
+</div>

@@ -1,29 +1,26 @@
-<p id="notice"><%= notice %></p>
+<div class="col-md-6 offset-md-3 col-xl-4 offset-xl-4">
+  <p></p>
+  <h2 class="h3">人員名單</h2>
+  <hr>
+  <div class="card card-block">
+    <h4 class="card-title"><%= @staff.name %></h4>
+    <hr>
+    <dl class="row">
+      <dt class="col-sm-4 text-xs-right"><strong>職稱：</strong></dt>
+      <dd class="col-sm-8 p-x-0"><%= @staff.title %></dd>
 
-<p>
-  <strong>Name:</strong>
-  <%= @staff.name %>
-</p>
+      <dt class="col-sm-4 text-xs-right">所屬部門： </dt>
+      <dd class="col-sm-8 p-x-0"><%= @staff.role %></dd>
 
-<p>
-  <strong>Title:</strong>
-  <%= @staff.title %>
-</p>
+      <dt class="col-sm-4 text-xs-right">聯絡電話：</dt>
+      <dd class="col-sm-8 p-x-0"><%= @staff.phone %></dd>
 
-<p>
-  <strong>Role:</strong>
-  <%= @staff.role %>
-</p>
+      <dt class="col-sm-4 text-xs-right">電子信箱：</dt>
+      <dd class="col-sm-8 p-x-0"><%= @staff.email %></dd>
+    </dl>
 
-<p>
-  <strong>Phone:</strong>
-  <%= @staff.phone %>
-</p>
-
-<p>
-  <strong>Email:</strong>
-  <%= @staff.email %>
-</p>
-
-<%= link_to 'Edit', edit_staff_path(@staff) %> |
-<%= link_to 'Back', staffs_path %>
+    <hr>
+    <%= link_to '修改資料', edit_staff_path(@staff), class: "btn btn-primary pull-xs-right" %>
+    <%= link_to '返回後台', managements_path , class: "btn btn-secondary pull-xs-right"%>
+  </div>
+</div>

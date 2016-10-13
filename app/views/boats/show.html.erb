@@ -1,4 +1,18 @@
-<p id="notice"><%= notice %></p>
+<div class="col-md-6 offset-md-3 col-xl-4 offset-xl-4">
+  <p></p>
+  <h2 class="h3">船隻清冊</h2>
+  <hr>
+  <div class="card card-block">
+    <h4 class="card-title"><%= @boat.name %></h4>
+    <hr>
+    <dl class="row">
+      <dt class="col-sm-3 "><strong>油耗：</strong></dt>
+      <dd class="col-sm-9 p-x-0"><%= @boat.fuelConsumption %> 升/浬</dd>
 
-<%= link_to 'Edit', edit_boat_path(@boat) %> |
-<%= link_to 'Back', boats_path %>
+    </dl>
+
+    <hr>
+    <%= link_to '修改資料', edit_boat_path(@boat), class: "btn btn-primary pull-xs-right" %>
+    <%= link_to '返回後台', managements_path , class: "btn btn-secondary pull-xs-right"%>
+  </div>
+</div>

@@ -1,20 +1,9 @@
 class BoatsController < ApplicationController
   before_action :set_boat, only: [:show, :edit, :update, :destroy]
 
-  # GET /boats
-  # GET /boats.json
-  def index
-    @boats = Boat.all
-  end
-
   # GET /boats/1
   # GET /boats/1.json
   def show
-  end
-
-  # GET /boats/new
-  def new
-    @boat = Boat.new
   end
 
   # GET /boats/1/edit
@@ -28,7 +17,7 @@ class BoatsController < ApplicationController
 
     respond_to do |format|
       if @boat.save
-        format.html { redirect_to @boat, notice: 'Boat was successfully created.' }
+        format.html { redirect_to @boat, notice: '船隻資料已新增' }
         format.json { render :show, status: :created, location: @boat }
       else
         format.html { render :new }
@@ -42,7 +31,7 @@ class BoatsController < ApplicationController
   def update
     respond_to do |format|
       if @boat.update(boat_params)
-        format.html { redirect_to @boat, notice: 'Boat was successfully updated.' }
+        format.html { redirect_to @boat, notice: '船隻資料已更新' }
         format.json { render :show, status: :ok, location: @boat }
       else
         format.html { render :edit }
