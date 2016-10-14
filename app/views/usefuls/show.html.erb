@@ -1,14 +1,19 @@
-<p id="notice"><%= notice %></p>
+<div class="col-md-6 offset-md-3 col-xl-4 offset-xl-4">
+  <p></p>
+  <h2 class="h3">常用詞彙</h2>
+  <hr>
+  <div class="card card-block">
+    <h4 class="card-title"><%= @useful.name %></h4>
+    <hr>
+    <dl class="row">
+      <dt class="col-xs-3 "><strong>類別：</strong></dt>
+      <dd class="col-xs-9 p-x-0"><%= @useful.catalog %></dd>
 
-<p>
-  <strong>Name:</strong>
-  <%= @useful.name %>
-</p>
+    </dl>
 
-<p>
-  <strong>Catalog:</strong>
-  <%= @useful.catalog %>
-</p>
-
-<%= link_to 'Edit', edit_useful_path(@useful) %> |
-<%= link_to 'Back', usefuls_path %>
+    <hr>
+    <%= link_to '刪除資料', @useful, class: "btn btn-sm btn-danger",  method: :delete, data: { confirm: "確定刪除該筆資料?" } %>
+    <%= link_to '修改資料', edit_useful_path(@useful), class: "btn btn-primary btn-sm pull-xs-right" %>
+    <%= link_to '返回後台', managements_path , class: "btn btn-secondary btn-sm pull-xs-right"%>
+  </div>
+</div>

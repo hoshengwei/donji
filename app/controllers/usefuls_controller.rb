@@ -1,21 +1,12 @@
 class UsefulsController < ApplicationController
   before_action :set_useful, only: [:show, :edit, :update, :destroy]
 
-  # GET /usefuls
-  # GET /usefuls.json
-  def index
-    @usefuls = Useful.all
-  end
 
   # GET /usefuls/1
   # GET /usefuls/1.json
   def show
   end
 
-  # GET /usefuls/new
-  def new
-    @useful = Useful.new
-  end
 
   # GET /usefuls/1/edit
   def edit
@@ -28,7 +19,7 @@ class UsefulsController < ApplicationController
 
     respond_to do |format|
       if @useful.save
-        format.html { redirect_to @useful, notice: 'Useful was successfully created.' }
+        format.html { redirect_to @useful, notice: '常用詞彙已新增' }
         format.json { render :show, status: :created, location: @useful }
       else
         format.html { render :new }
@@ -42,7 +33,7 @@ class UsefulsController < ApplicationController
   def update
     respond_to do |format|
       if @useful.update(useful_params)
-        format.html { redirect_to @useful, notice: 'Useful was successfully updated.' }
+        format.html { redirect_to @useful, notice: '常用詞彙已更新' }
         format.json { render :show, status: :ok, location: @useful }
       else
         format.html { render :edit }
@@ -56,7 +47,7 @@ class UsefulsController < ApplicationController
   def destroy
     @useful.destroy
     respond_to do |format|
-      format.html { redirect_to usefuls_url, notice: 'Useful was successfully destroyed.' }
+      format.html { redirect_to managements_path, notice: '常用詞彙已刪除' }
       format.json { head :no_content }
     end
   end

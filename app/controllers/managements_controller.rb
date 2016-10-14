@@ -7,6 +7,7 @@ class ManagementsController < ApplicationController
     @usefuls = Useful.all
     @staff = Staff.new
     @boat = Boat.new
+    @useful = Useful.new
   end
 
 

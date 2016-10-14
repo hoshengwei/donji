@@ -1,0 +1,14 @@
+<div class="modal-body">
+  <%= simple_form_for(@useful) do |f| %>
+    <%= f.error_notification %>
+
+    <div class="form-inputs">
+      <%= f.input :name, label: "常用詞彙：", placeholder: "執行巡護勤務" %>
+    <%= f.input :catalog, collection: [:工作項目,:巡查海域] ,label: "類別",input_html: { class: "custom-select"}%>
+      <div class="modal-footer">
+        <%= f.button :submit,"儲存資料",class: "btn btn-primary pull-xs-right" %>
+        <%= link_to "返回後台", managements_path, class: "btn btn-secondary pull-xs-right",type: "button" %>
+      </div>
+    </div>
+  <% end %>
+</div>
