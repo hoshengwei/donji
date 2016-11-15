@@ -9,4 +9,5 @@ Rails.application.routes.draw do
   resources :managements
   get 'ocean_inspects/:id/logbooks', to: 'ocean_inspects#logbooks', as: 'logbooks'
   get 'cwb', to: 'weathers#cwb', as: 'cwb'
+  get 'record', to: 'ocean_inspects#record', as: 'record'
 end

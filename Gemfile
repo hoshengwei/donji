@@ -41,6 +41,11 @@ gem 'hamlit'
 gem 'prawn'
 gem 'prawn-table'
 gem "rails-i18n"
+#底下三個套件為EXCEL使用
+gem 'rubyzip', '~> 1.1.0'
+gem 'axlsx', '2.1.0.pre'
+gem 'axlsx_rails'
+#
 # Use Capistrano for deployment
 gem 'capistrano-rails', group: :development
 

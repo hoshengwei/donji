@@ -1,0 +1,101 @@
+wb = xlsx_package.workbook
+
+# Style 設定
+xlsx_package.use_autowidth = true
+header = wb.styles.add_style border:  { style: :thin, color: "00"},
+                             alignment: { horizontal: :center,
+                                          vertical: :center ,
+                                          wrap_text:  true},
+                             sz: 14
+
+to_center = wb.styles.add_style border:  { style: :thin, color: "00"},
+                                alignment: { horizontal: :center,
+                                             vertical: :center ,
+                                             wrap_text:  false},
+                                sz: 12
+bottom = wb.styles.add_style alignment: { horizontal: :left,
+                                           vertical: :center ,
+                                           wrap_text:  false},
+                              sz: 16
+# 工作表內容
+wb.add_worksheet(name: "小艇使用紀錄") do |sheet|
+  sheet.add_row ["內政部營建署海洋國家公園管理處東吉管理站巡護小艇#{@insps.first.year}年#{@insps.first.month}月使用紀錄表"], style: header, width: [1]
+  sheet.merge_cells("A1:Q1")
+  sheet.add_row ["項目","","出港","進港","航行時數","","巡護範圍","工作內容","航行浬數","消耗油料\n(公升)","加油\n(公升)","發票號碼","船長","領隊","乘員","使用船艇","備註"], style: to_center, width: [1]
+  sheet.merge_cells("A2:B2")
+  sheet.merge_cells("E2:F2")
+  sheet.add_row ["日期","星期","","","日間","夜間"], style: to_center, width: [1]
+  sheet.merge_cells("C2:C3")
+  sheet.merge_cells("D2:D3")
+  sheet.merge_cells("G2:G3")
+  sheet.merge_cells("H2:H3")
+  sheet.merge_cells("I2:I3")
+  sheet.merge_cells("J2:J3")
+  sheet.merge_cells("K2:K3")
+  sheet.merge_cells("L2:L3")
+  sheet.merge_cells("M2:M3")
+  sheet.merge_cells("N2:N3")
+  sheet.merge_cells("O2:O3")
+  sheet.merge_cells("P2:P3")
+  sheet.merge_cells("Q2:Q3")
+  # 以上為標題 以下為內容
+  @insps.each do |insp|
+    # 時間轉換
+    st = insp.s_time.to_time
+    et = insp.e_time.to_time
+    mt = "08:00".to_time
+    nt = "18:00".to_time
+    # 時間判斷
+    if st < mt
+      if et < mt
+        n1 = (et - st)
+      else
+        n1 = (mt - st)
+      end
+    else
+      n1 = 0
+    end
+    if et > nt
+      if st > nt
+        n2 = (et - st)
+      else
+        n2 = (et - nt)
+      end
+    else
+      n2 = 0
+    end
+    nighttime = (n1 + n2 )/3600
+    daytime = (et - st)/3600 - nighttime
+    # 表單
+    sheet.add_row [
+                    insp.day,
+                    insp.wday,
+                    insp.s_time,
+                    insp.e_time,
+                    daytime,
+                    nighttime,
+                    insp.location,
+                    insp.work_items,
+                    insp.distance,
+                    insp.gas_consumption,
+                    insp.gas,
+                    "",
+                    Staff.find(insp.captain).name,
+                    Staff.find(insp.leader).name,
+                    insp.crew,
+                    Boat.find(insp.boat_id).name,
+                    insp.note
+                  ],
+                  widths: [1, :auto, :auto, :auto, :auto, :auto, :auto, :auto, :auto, :auto, :auto, :auto, :auto, :auto, :auto, :auto],
+                  style: to_center
+  end
+  sheet.add_row [
+    "總航行時數","","","","=SUM(E4:E#{@insps.length + 3 })","=SUM(F4:F#{@insps.length + 3 })","小時","總計","=SUM(I4:I#{@insps.length + 3 })","=SUM(J4:J#{@insps.length + 3 })","=SUM(K4:K#{@insps.length + 3 })",""
+  ], style: to_center, width: [1]
+  sheet.merge_cells("A#{@insps.length + 4 }:D#{@insps.length + 4 }")
+  sheet.merge_cells("L#{@insps.length + 4 }:Q#{@insps.length + 4 }")
+  sheet.add_row ["製表","","","","","","","主管"], style: bottom, width: [1]
+  # sheet.merge_cells("A#{@insps.length + 5 }:B#{@insps.length + 5 }")
+
+
+end

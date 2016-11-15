@@ -1,6 +1,17 @@
 class OceanInspectsController < ApplicationController
   before_action :set_ocean_inspect, only: [:show, :edit, :update, :destroy, :logbooks]
 
+
+
+  def record
+    @insps = OceanInspect.all
+    respond_to do |format|
+      format.xlsx  {
+        response.headers['Content-Disposition'] = "attachment; filename=\"#{@insps.first.year}年#{@insps.first.month}月巡護小艇使用紀錄表.xlsx\""
+      }
+    end
+  end
+
   # GET /ocean_inspects
   # GET /ocean_inspects.json
   def index
