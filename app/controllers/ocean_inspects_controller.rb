@@ -4,18 +4,33 @@ class OceanInspectsController < ApplicationController
 
 
   def record
-    @insps = OceanInspect.all
-    respond_to do |format|
-      format.xlsx  {
-        response.headers['Content-Disposition'] = "attachment; filename=\"#{@insps.first.year}年#{@insps.first.month}月巡護小艇使用紀錄表.xlsx\""
-      }
+    year = Time.now.year - 1911
+    month = Time.now.month
+    data = params[:date].to_s.split("-")
+    year = data[0].to_i - 1911 if data != []
+    month = data[1] if data != []
+    @insps = OceanInspect.where(year: year).where(month: month)
+    if @insps.length != 0
+      respond_to do |format|
+        format.xlsx  {
+          response.headers['Content-Disposition'] = "attachment; filename=\"#{@insps.first.year}年#{@insps.first.month}月巡護小艇使用紀錄表.xlsx\""
+        }
+      end
+    else
+      redirect_to root_path
     end
   end
 
   # GET /ocean_inspects
   # GET /ocean_inspects.json
   def index
-    @ocean_inspects = OceanInspect.all
+    year = Time.now.year - 1911
+    month = Time.now.month
+    data = params[:date].to_s.split("-")
+    year = data[0].to_i - 1911 if data != []
+    month = data[1] if data != []
+
+    @ocean_inspects = OceanInspect.where(year: year).where(month: month)
   end
 
   # GET /ocean_inspects/1

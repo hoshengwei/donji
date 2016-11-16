@@ -42,3 +42,31 @@
     <% end %>
   </tbody>
 </table>
+<hr>
+<div class="col-xs-12 col-md-4 col-lg-3 p-x-0">
+  <form action="/" accept-charset="UTF-8" method="get">
+    <div class="input-group">
+      <input name="date" id="pickmonth" type="text" class="form-control" placeholder="選擇年/月...">
+      <span class="input-group-btn">
+        <button  name="commit" class="btn btn-success" type="submit">檢視月報</button>
+      </span>
+    </div>
+  </form>
+</div>
+<div class="col-xs-12 col-md-4 col-lg-3 p-x-0">
+  <form action="/record" accept-charset="UTF-8" method="get">
+    <div class="input-group">
+      <input name="date" id="pickmonth2" type="text" class="form-control" placeholder="選擇年/月...">
+      <input name="format" value="xlsx" type="hidden">
+      <span class="input-group-btn">
+        <button  name="commit" class="btn btn-danger" type="submit">輸出月報</button>
+      </span>
+    </div>
+  </form>
+</div>
+
+<script>
+  // The date picker (read the docs)
+  $('#pickmonth').pickadate({format: 'yyyy-mm',max: true})
+  $('#pickmonth2').pickadate({format: 'yyyy-mm',max: true})
+</script>

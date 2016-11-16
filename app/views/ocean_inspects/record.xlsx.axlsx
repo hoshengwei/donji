@@ -5,7 +5,7 @@ xlsx_package.use_autowidth = true
 header = wb.styles.add_style border:  { style: :thin, color: "00"},
                              alignment: { horizontal: :center,
                                           vertical: :center ,
-                                          wrap_text:  true},
+                                          wrap_text:  false},
                              sz: 14
 
 to_center = wb.styles.add_style border:  { style: :thin, color: "00"},
@@ -13,18 +13,23 @@ to_center = wb.styles.add_style border:  { style: :thin, color: "00"},
                                              vertical: :center ,
                                              wrap_text:  false},
                                 sz: 12
+to_total = wb.styles.add_style border:  { style: :thin, color: "00"},
+                               alignment: { horizontal: :center,
+                                             vertical: :center ,
+                                             wrap_text:  false},
+                               sz: 12,
+                               b: true,
+                               bg_color: 'FFF60B'
 bottom = wb.styles.add_style alignment: { horizontal: :left,
                                            vertical: :center ,
                                            wrap_text:  false},
-                              sz: 16
+                             sz: 16
+
 # 工作表內容
-wb.add_worksheet(name: "小艇使用紀錄") do |sheet|
-  sheet.add_row ["內政部營建署海洋國家公園管理處東吉管理站巡護小艇#{@insps.first.year}年#{@insps.first.month}月使用紀錄表"], style: header, width: [1]
+wb.add_worksheet(name: "#{@insps.first.month}月小艇使用紀錄") do |sheet|
   sheet.merge_cells("A1:Q1")
-  sheet.add_row ["項目","","出港","進港","航行時數","","巡護範圍","工作內容","航行浬數","消耗油料\n(公升)","加油\n(公升)","發票號碼","船長","領隊","乘員","使用船艇","備註"], style: to_center, width: [1]
   sheet.merge_cells("A2:B2")
   sheet.merge_cells("E2:F2")
-  sheet.add_row ["日期","星期","","","日間","夜間"], style: to_center, width: [1]
   sheet.merge_cells("C2:C3")
   sheet.merge_cells("D2:D3")
   sheet.merge_cells("G2:G3")
@@ -38,6 +43,12 @@ wb.add_worksheet(name: "小艇使用紀錄") do |sheet|
   sheet.merge_cells("O2:O3")
   sheet.merge_cells("P2:P3")
   sheet.merge_cells("Q2:Q3")
+  sheet.add_row ["內政部營建署海洋國家公園管理處東吉管理站巡護小艇#{@insps.first.year}年#{@insps.first.month}月使用紀錄表","","","","","","","","","","","","","","","",""], style: header, width: 1, wrap_text: true
+
+  sheet.add_row ["項目","","出港","進港","航行時數","","巡護範圍","工作內容","航行浬數","消耗油料\x0A(公升)","加油\x0A(公升)","發票號碼","船長","領隊","乘員","使用船艇","備註"], style: to_center, width: [1]
+
+  sheet.add_row ["日期","星期","","","日間","夜間","","","","","","","","","","",""], style: to_center, width: [1]
+
   # 以上為標題 以下為內容
   @insps.each do |insp|
     # 時間轉換
@@ -86,16 +97,16 @@ wb.add_worksheet(name: "小艇使用紀錄") do |sheet|
                     Boat.find(insp.boat_id).name,
                     insp.note
                   ],
-                  widths: [1, :auto, :auto, :auto, :auto, :auto, :auto, :auto, :auto, :auto, :auto, :auto, :auto, :auto, :auto, :auto],
+                  widths: [1],
                   style: to_center
   end
   sheet.add_row [
-    "總航行時數","","","","=SUM(E4:E#{@insps.length + 3 })","=SUM(F4:F#{@insps.length + 3 })","小時","總計","=SUM(I4:I#{@insps.length + 3 })","=SUM(J4:J#{@insps.length + 3 })","=SUM(K4:K#{@insps.length + 3 })",""
-  ], style: to_center, width: [1]
+    "總航行時數","","","","=SUM(E4:E#{@insps.length + 3 })","=SUM(F4:F#{@insps.length + 3 })","小時","總計","=SUM(I4:I#{@insps.length + 3 })","=SUM(J4:J#{@insps.length + 3 })","=SUM(K4:K#{@insps.length + 3 })","","","","","",""
+  ], style: to_total, width: [1]
   sheet.merge_cells("A#{@insps.length + 4 }:D#{@insps.length + 4 }")
   sheet.merge_cells("L#{@insps.length + 4 }:Q#{@insps.length + 4 }")
-  sheet.add_row ["製表","","","","","","","主管"], style: bottom, width: [1]
-  # sheet.merge_cells("A#{@insps.length + 5 }:B#{@insps.length + 5 }")
+  sheet.add_row ["製表: ","","","","","","","主管: "], style: bottom, width: [1]
+  sheet.merge_cells("A#{@insps.length + 5 }:B#{@insps.length + 5 }")
 
 
 end
