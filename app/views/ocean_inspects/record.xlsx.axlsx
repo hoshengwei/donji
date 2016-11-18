@@ -6,26 +6,45 @@ header = wb.styles.add_style border:  { style: :thin, color: "00"},
                              alignment: { horizontal: :center,
                                           vertical: :center ,
                                           wrap_text:  false},
-                             sz: 14
+                             sz: 18,
+                             width: 1,
+                             num_fmt: 3
 
 to_center = wb.styles.add_style border:  { style: :thin, color: "00"},
                                 alignment: { horizontal: :center,
                                              vertical: :center ,
-                                             wrap_text:  false},
+                                             wrap_text:  true},
+                                num_fmt: 3,
                                 sz: 12
+sub_title = wb.styles.add_style border:  { style: :thin, color: "00"},
+                                alignment: { horizontal: :center,
+                                             vertical: :center ,
+                                             wrap_text:  true},
+                                sz: 12,
+                                num_fmt: 3,
+                                bg_color: 'a2a2a2'
 to_total = wb.styles.add_style border:  { style: :thin, color: "00"},
                                alignment: { horizontal: :center,
                                              vertical: :center ,
-                                             wrap_text:  false},
+                                             wrap_text:  true},
                                sz: 12,
                                b: true,
+                               num_fmt: 3,
                                bg_color: 'FFF60B'
-bottom = wb.styles.add_style alignment: { horizontal: :left,
+adjust = wb.styles.add_style  border:  { style: :thin, color: "00"},
+                              alignment: { horizontal: :center,
+                                            vertical: :center ,
+                                            wrap_text:  true},
+                              sz: 12,
+                              bg_color: 'fefea8',
+                              num_fmt: 3
+bottom = wb.styles.add_style  alignment: { horizontal: :left,
                                            vertical: :center ,
-                                           wrap_text:  false},
-                             sz: 16
+                                           wrap_text:  true},
+                              num_fmt: 3,
+                              sz: 20
 
-# 工作表內容
+# 巡護小艇使用紀錄工作表內容
 wb.add_worksheet(name: "#{@insps.first.month}月小艇使用紀錄") do |sheet|
   sheet.merge_cells("A1:Q1")
   sheet.merge_cells("A2:B2")
@@ -118,14 +137,50 @@ wb.add_worksheet(name: "#{@insps.first.month}月小艇使用紀錄") do |sheet|
       empty_item += 1
     end
   end
-  total_item = @insps.count + empty_item
+  @total_item = @insps.count + empty_item
   sheet.add_row [
-    "總航行時數","","","","=SUM(E4:E#{total_item + 3 })","=SUM(F4:F#{total_item + 3 })","小時","總計","=SUM(I4:I#{total_item + 3 })","=SUM(J4:J#{total_item + 3 })","=SUM(K4:K#{total_item + 3 })","","","","","",""
+    "總航行時數","","","","=SUM(E4:E#{@total_item + 3 })","=SUM(F4:F#{@total_item + 3 })","小時","總計","=SUM(I4:I#{@total_item + 3 })","=SUM(J4:J#{@total_item + 3 })","=SUM(K4:K#{@total_item + 3 })","","","","","",""
   ], style: to_total, width: [1]
-  sheet.merge_cells("A#{total_item + 4 }:D#{total_item + 4 }")
-  sheet.merge_cells("L#{total_item + 4 }:Q#{total_item + 4 }")
-  sheet.add_row ["製表: ","","","","","","","主管: "], style: bottom, width: [1]
-  sheet.merge_cells("A#{total_item + 5 }:B#{total_item + 5 }")
+  sheet.merge_cells("A#{@total_item + 4 }:D#{@total_item + 4 }")
+  sheet.merge_cells("L#{@total_item + 4 }:Q#{@total_item + 4 }")
+  sheet.add_row ["製表: ","","","","","","","主管: "], style: bottom, width: [1], height: 30
+  sheet.merge_cells("A#{@total_item + 5 }:B#{@total_item + 5 }")
 
 
+end
+
+
+# 每月付款分析
+wb.add_worksheet(name: "#{@insps.first.month}月付款分析表") do |sheet|
+  sheet.column_widths 0.2
+  sheet.merge_cells("A1:I1")
+  sheet.add_row ["#{@insps.first.month}月付款分析表","","","","","","","",""], style: header
+  sheet.add_row ["目次","科目","", "","單位","數量","單價","價格","說明"], style: to_center
+  sheet.add_row ["一","人事費","","","","","","",""], style: sub_title
+  sheet.add_row ["","","船艇之駕駛薪資","薪資(元)","月",1,33600,33600,""], style: to_center, height: 50
+  sheet.add_row ["","","","出海勤務津貼(元)","時","=#{@insps.first.month}月小艇使用紀錄!E#{@total_item + 4} + #{@insps.first.month}月小艇使用紀錄!F#{@total_item + 4}",120,"=F5*G5","船長出海勤務津貼以船艇出港後進港前海上實際航行時間計算，每小時核給120元。"], style: adjust, height: 50
+  sheet.add_row ["小計","","","","","","","=H4+H5",""], style: to_center
+  sheet.add_row ["二","設備使用及維護費與租金等","","","","","","",""], style: sub_title, height: 40
+  sheet.add_row ["","","船艇租金","船艇租賃成本\x0A(1艘)","月",1,57500,57500,""], style: to_center, height: 50
+  sheet.add_row ["","","","夜間船艇補貼(元)","時數","=#{@insps.first.month}月小艇使用紀錄!F#{@total_item + 4}",400,"=F9*G9","夜間船艇補貼以船艇於0800~1800以外時間在海上實際航行時間計算，每小時核給400元。"], style: adjust, height: 50
+  sheet.add_row ["","","","保險費","月",1,2500,2500,"整年為30,000元，每月為30000/12=2500"], style: to_center, height: 50
+  sheet.add_row ["小計","","","","","","","=H8+H9+H10",""], style: to_center
+  sheet.add_row ["","一至二項","小計","","","","","=H6+H11",""], style: to_total
+  sheet.add_row ["三", "雜支費(5%)", "", "", "", "", "", "=H12/0.9*0.05",""], style: to_center
+  sheet.add_row ["","一至三項","小計","","","","","=H12+H13",""], style: to_total
+  sheet.add_row ["四", "廠商利稅(5%)", "", "", "", "", "", "=H13",""], style: to_center
+  sheet.add_row ["","總計","","","","","","=H14+H15",""], style: to_total
+  sheet.add_row ["製表：","","","","","","主管：","",""], style: bottom, height: 40
+  sheet.merge_cells("A4:A5")
+  sheet.merge_cells("B4:B5")
+  sheet.merge_cells("C4:C5")
+  sheet.merge_cells("A6:G6")
+  sheet.merge_cells("A8:A10")
+  sheet.merge_cells("B8:B10")
+  sheet.merge_cells("C8:C10")
+  sheet.merge_cells("A11:G11")
+  sheet.merge_cells("C12:G12")
+  sheet.merge_cells("C14:G14")
+  sheet.merge_cells("B16:G16")
+  sheet.merge_cells("A17:B17")
 end
