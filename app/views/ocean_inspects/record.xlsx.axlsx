@@ -44,69 +44,88 @@ wb.add_worksheet(name: "#{@insps.first.month}月小艇使用紀錄") do |sheet|
   sheet.merge_cells("P2:P3")
   sheet.merge_cells("Q2:Q3")
   sheet.add_row ["內政部營建署海洋國家公園管理處東吉管理站巡護小艇#{@insps.first.year}年#{@insps.first.month}月使用紀錄表","","","","","","","","","","","","","","","",""], style: header, width: 1, wrap_text: true
-
   sheet.add_row ["項目","","出港","進港","航行時數","","巡護範圍","工作內容","航行浬數","消耗油料\x0A(公升)","加油\x0A(公升)","發票號碼","船長","領隊","乘員","使用船艇","備註"], style: to_center, width: [1]
 
   sheet.add_row ["日期","星期","","","日間","夜間","","","","","","","","","","",""], style: to_center, width: [1]
+  @d_in_m = Time.days_in_month(@insps.first.month.to_i, @insps.first.year.to_i)
+  empty_item = 0
+  for n in 1..@d_in_m
+    # 以上為標題 以下為內容
+    @insps.each do |insp|
 
-  # 以上為標題 以下為內容
-  @insps.each do |insp|
-    # 時間轉換
-    st = insp.s_time.to_time
-    et = insp.e_time.to_time
-    mt = "08:00".to_time
-    nt = "18:00".to_time
-    # 時間判斷
-    if st < mt
-      if et < mt
-        n1 = (et - st)
-      else
-        n1 = (mt - st)
+      if insp.day.to_i == n
+        # 時間轉換
+        st = insp.s_time.to_time
+        et = insp.e_time.to_time
+        mt = "08:00".to_time
+        nt = "18:00".to_time
+        # 時間判斷
+        if st < mt
+          if et < mt
+            n1 = (et - st)
+          else
+            n1 = (mt - st)
+          end
+        else
+          n1 = 0
+        end
+        if et > nt
+          if st > nt
+            n2 = (et - st)
+          else
+            n2 = (et - nt)
+          end
+        else
+          n2 = 0
+        end
+        nighttime = (n1 + n2 )/3600
+        daytime = (et - st)/3600 - nighttime
+        # 表單
+        sheet.add_row [
+                        insp.day,
+                        insp.wday,
+                        insp.s_time,
+                        insp.e_time,
+                        daytime,
+                        nighttime,
+                        insp.location,
+                        insp.work_items,
+                        insp.distance,
+                        insp.gas_consumption,
+                        insp.gas,
+                        "",
+                        Staff.find(insp.captain).name,
+                        Staff.find(insp.leader).name,
+                        insp.crew,
+                        Boat.find(insp.boat_id).name,
+                        insp.note
+                      ],
+                      widths: [1],
+                      style: to_center
       end
-    else
-      n1 = 0
     end
-    if et > nt
-      if st > nt
-        n2 = (et - st)
-      else
-        n2 = (et - nt)
-      end
-    else
-      n2 = 0
+    wday = String.new
+    if @insps.where(day: "%02d" % n).count == 0
+      wday_i = Time.new(@insps.first.year.to_i + 1911, @insps.first.month, n).to_date.wday.to_i
+      wday = "日" if wday_i === 0
+      wday = "一" if wday_i === 1
+      wday = "二" if wday_i === 2
+      wday = "三" if wday_i === 3
+      wday = "四" if wday_i === 4
+      wday = "五" if wday_i === 5
+      wday = "六" if wday_i === 6
+      sheet.add_row [n, wday, "0:00", "0:00", 0, 0, "東吉港內", "維護保養", 0, 0, 0, "","許明中","","","保育1號",""], widths: [1], style: to_center
+      empty_item += 1
     end
-    nighttime = (n1 + n2 )/3600
-    daytime = (et - st)/3600 - nighttime
-    # 表單
-    sheet.add_row [
-                    insp.day,
-                    insp.wday,
-                    insp.s_time,
-                    insp.e_time,
-                    daytime,
-                    nighttime,
-                    insp.location,
-                    insp.work_items,
-                    insp.distance,
-                    insp.gas_consumption,
-                    insp.gas,
-                    "",
-                    Staff.find(insp.captain).name,
-                    Staff.find(insp.leader).name,
-                    insp.crew,
-                    Boat.find(insp.boat_id).name,
-                    insp.note
-                  ],
-                  widths: [1],
-                  style: to_center
   end
+  total_item = @insps.count + empty_item
   sheet.add_row [
-    "總航行時數","","","","=SUM(E4:E#{@insps.length + 3 })","=SUM(F4:F#{@insps.length + 3 })","小時","總計","=SUM(I4:I#{@insps.length + 3 })","=SUM(J4:J#{@insps.length + 3 })","=SUM(K4:K#{@insps.length + 3 })","","","","","",""
+    "總航行時數","","","","=SUM(E4:E#{total_item + 3 })","=SUM(F4:F#{total_item + 3 })","小時","總計","=SUM(I4:I#{total_item + 3 })","=SUM(J4:J#{total_item + 3 })","=SUM(K4:K#{total_item + 3 })","","","","","",""
   ], style: to_total, width: [1]
-  sheet.merge_cells("A#{@insps.length + 4 }:D#{@insps.length + 4 }")
-  sheet.merge_cells("L#{@insps.length + 4 }:Q#{@insps.length + 4 }")
+  sheet.merge_cells("A#{total_item + 4 }:D#{total_item + 4 }")
+  sheet.merge_cells("L#{total_item + 4 }:Q#{total_item + 4 }")
   sheet.add_row ["製表: ","","","","","","","主管: "], style: bottom, width: [1]
-  sheet.merge_cells("A#{@insps.length + 5 }:B#{@insps.length + 5 }")
+  sheet.merge_cells("A#{total_item + 5 }:B#{total_item + 5 }")
 
 
 end
