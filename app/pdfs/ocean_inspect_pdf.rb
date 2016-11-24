@@ -8,7 +8,7 @@ class OceanInspectPdf < Prawn::Document
     font "Kai"
     methods
     ocean_inspect_content
-    pics if !@insp.pics.second.nil?
+    pics if @insp.pics?
     crew
     move_down 10
     submit
@@ -41,7 +41,7 @@ class OceanInspectPdf < Prawn::Document
       dd += "#{n}.  #{diary[i]}\n"
       n += 1
     end
-    map = "public/#{@insp.pics.first.url}"
+    map = "public/#{@insp.map}"
 
     data = [
       [{content: time, colspan: 2, rowspan: 2} ,{content: "潮汐時間：",rowspan: 2, valign: :center},{content: tide, colspan: 2, rowspan: 2},"天氣：#{@weather.weather}","風力：#{@weather.wdlv} 級"],
@@ -59,12 +59,11 @@ class OceanInspectPdf < Prawn::Document
   end
 
   def pics
-    pic = "public/#{@insp.pics.second.url}"
+    pic = "public/#{@insp.pics}"
     table([["巡查照片：",{image: pic, fit:[220,180], position: :center, colspan: 6}]],width: 530, column_widths: {0 => 70})
   end
   def crew
     data = [
-      ["備註：",{content: @insp.note, colspan: 6}],
       ["巡查人員：",{content: "#{Staff.find(@insp.leader).name} 、 #{@insp.crew}", colspan: 6}],
       ["船長：",{content: "#{Staff.find(@insp.captain).name}", colspan: 6}]
     ]

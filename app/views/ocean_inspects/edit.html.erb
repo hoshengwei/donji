@@ -33,12 +33,22 @@
         <%= f.input :diary  ,label: '巡查記事 <span class="small"> <務必使用數字項次排序></span>'.html_safe,input_html: {class: "tinymce", rows: 8 }%>
         <%= f.input :note ,label: '備註事項', placeholder: "避颱..."%>
       </div>
-      <dic id="pic">
-        <%= f.input :pics, label:'附加圖片  <span class="small"> <第一張須為巡查地圖，巡查照片為第二張，其餘只於網頁顯示，報表中不印出></span>'.html_safe ,label_html: { class: "custom-file"} do %>
-          <%= f.file_field :pics, multiple: true ,class: "form-control-file btn-sm"%>
-          <%= f.hidden_field :pics_cache %>
+      <div id="pic">
+        <%= f.input :map, label:'巡查地圖'.html_safe ,label_html: { class: "custom-file"} do %>
+          <%= f.file_field :map ,class: "form-control-file btn-sm"%>
+          <%= f.hidden_field :map_cache %>
+          <%= image_tag @ocean_inspect.map, class: "img-thumbnail",style: "width: 200px; height: 200px" if @ocean_inspect.map? %>
         <% end %>
-      </dic>
+      </div>
+      <hr>
+      <div id="pic">
+        <%= f.input :pics, label:'巡查照片'.html_safe ,label_html: { class: "custom-file"} do %>
+          <%= f.file_field :pics, class: "form-control-file btn-sm"%>
+          <%= f.hidden_field :pics_cache %>
+          <%= image_tag @ocean_inspect.pics, class: "img-thumbnail",style: "width: 200px; height: 200px" if @ocean_inspect.pics? %>
+          <%= f.check_box :remove_pics %> 移除巡查照片
+        <% end %>
+      </div>
     </div>
   </div>
   <div class="form-actions col-xs-12">

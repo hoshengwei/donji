@@ -36,8 +36,8 @@ class OceanInspect < ApplicationRecord
   end
 
 
-  mount_uploaders :pics, ImageUploader
-  serialize :pics
+  mount_uploader :pics, ImageUploader
+  mount_uploader :map, ImageUploader
 
   # Validation
   validates :date, presence: true
