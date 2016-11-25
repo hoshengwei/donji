@@ -42,7 +42,11 @@
   <div class="col-lg-12 p-a-0" id="diary">
     <hr>
     <p class="font-weight-bold p-a-0">巡查紀事：</p>
-    <%= @ocean_inspect.diary.html_safe %>
+      <ol>
+        <% @ocean_inspect.diaries.each do |diary|%>
+          <li><%= diary.item %></li>
+        <% end %>
+      </ol>
   </div>
   <div class="col-lg-12 p-a-0" id="pic">
     <hr>

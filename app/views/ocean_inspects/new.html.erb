@@ -27,25 +27,33 @@
       </div>
     </div>
     <div class="col-xl-7 col-lg-12">
-      <div id="text">
-        <%= tinymce %>
-        <%= f.input :diary  ,label: '巡查記事 <span class="small"><務必使用數字項次排序></span>'.html_safe,input_html: {class: "tinymce", rows: 8 }%>
-        <%= f.input :note ,label: '備註事項', placeholder: "避颱..."%>
+      <div id='diaries' class="form-group row p-x-2">
+        <p>巡查記事</p>
+        <%= f.simple_fields_for :diaries do |diary| %>
+          <%= render 'diary_fields', f: diary %>
+        <% end %>
+        <div class='links p-y-1'>
+          <%= link_to_add_association '新增項目', f, :diaries, type: "button", class: "btn btn-sm btn-primary"%>
+        </div>
+        <hr>
       </div>
       <div id="pic">
         <%= f.input :map, label:'巡查地圖'.html_safe ,label_html: { class: "custom-file"} do %>
+          <%= image_tag @ocean_inspect.map, class: "img-thumbnail",style: "width: 150px; height: 150px" if @ocean_inspect.map? %>
           <%= f.file_field :map ,class: "form-control-file btn-sm"%>
           <%= f.hidden_field :map_cache %>
-          <%= image_tag @ocean_inspect.map, class: "img-thumbnail",style: "width: 200px; height: 200px" if @ocean_inspect.map? %>
         <% end %>
       </div>
       <hr>
       <div id="pic">
         <%= f.input :pics, label:'巡查照片'.html_safe ,label_html: { class: "custom-file"} do %>
+          <%= image_tag @ocean_inspect.pics, class: "img-thumbnail",style: "width: 150px; height: 150px" if @ocean_inspect.pics? %>
           <%= f.file_field :pics, class: "form-control-file btn-sm"%>
           <%= f.hidden_field :pics_cache %>
-          <%= image_tag @ocean_inspect.pics, class: "img-thumbnail",style: "width: 200px; height: 200px" if @ocean_inspect.pics? %>
         <% end %>
+      </div>
+      <div class="">
+        <%= f.input :note ,label: '備註事項', placeholder: "避颱..."%>
       </div>
     </div>
   </div>

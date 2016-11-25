@@ -1,4 +1,6 @@
 class OceanInspect < ApplicationRecord
+  has_many :diaries, dependent: :destroy, inverse_of: :ocean_inspect
+  accepts_nested_attributes_for :diaries, reject_if: :all_blank, allow_destroy: true
 
   before_save do
     wday_i = self.date.to_date.wday.to_i
@@ -47,5 +49,4 @@ class OceanInspect < ApplicationRecord
   validates :captain, presence: true
   validates :distance, presence: true
   validates :leader, presence: true
-  validates :diary, presence: true
 end

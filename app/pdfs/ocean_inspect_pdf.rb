@@ -33,12 +33,10 @@ class OceanInspectPdf < Prawn::Document
       oil = "0"
     end
     oil<<(" 公升")
-    diary = @insp.diary.gsub!(/<\/ol>/,"").gsub!(/<ol>/,"").gsub!(/\//,"").strip.split("<li>")
     dd = String.new
     n = 1
-    (1..diary.count-1).each do |i|
-      next if i.even?
-      dd += "#{n}.  #{diary[i]}\n"
+    @insp.diaries.each do |diary|
+      dd += "#{n}、\s #{diary.item} \n"
       n += 1
     end
     map = "public/#{@insp.map}"
@@ -53,7 +51,7 @@ class OceanInspectPdf < Prawn::Document
       ["航行路線：",{image: map, fit:[220,180], position: :center, colspan: 6}]
     ]
 
-    table(data, width: 530, column_widths: {0 => 10, 1 => 130, 2 => 5, 3 => 20, 4 => 120})
+    table(data, width: 530, column_widths: {0 => 15, 1 => 130, 2 => 5, 3 => 20, 4 => 120})
 
 
   end

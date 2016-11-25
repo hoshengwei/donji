@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  item: MyString
+  done: false
+  ocean_inspect: one
+
+two:
+  item: MyString
+  done: false
+  ocean_inspect: two
