@@ -20,7 +20,7 @@
     <br>
     <hr>
     <div class="form-actions">
-      <%= link_to "取消" ,transportation_path(params[:id]),  class: "btn btn-outline-danger pull-xs-left"%>
+      <%= link_to "取消" ,transportations_path(@transportation),  class: "btn btn-outline-danger pull-xs-left"%>
       <%= f.button :submit,  "新建｜更新名冊", class: "btn btn-outline-primary pull-xs-right" , data: { disable_with: "新建中..." }%>
     </div>
   </div>
