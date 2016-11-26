@@ -1,0 +1,57 @@
+<div class="col-sm-10 offset-sm-1 col-xl-8 offset-xl-2 p-x-0">
+  <p></p>
+  <h2 class="Display-4 text-center p-x-1"><%= "#{@transportation.year}年#{@transportation.month}月#{@transportation.day}日 - 運補人員名冊" %></h2>
+  <hr>
+  <table class="table table-hover table-sm">
+    <thead class="bg-primary">
+      <tr>
+        <th>單位</th>
+        <th>職稱</th>
+        <th>姓名</th>
+        <th>身份證字號</th>
+        <th>狀態</th>
+        <th>運補地點</th>
+      </tr>
+    </thead>
+    <% @crews = @transportation.transportationcrews %>
+    <tbody>
+      <%  @crews.each do |crew| %>
+        <tr>
+          <td><%= Staff.find(crew.staff_id).role %></td>
+          <td><%= Staff.find(crew.staff_id).title %></td>
+          <td><%= Staff.find(crew.staff_id).name %></td>
+          <td><%= Staff.find(crew.staff_id).id_number %></td>
+          <td><%= crew.status %></td>
+          <td><%= crew.direction %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <hr>
+  <p class="text-xs-center">
+    <%= "共計上島#{@crews.where(status: "上島").count}人、下島#{@crews.where(status: "下島").count}人" %>
+  </p>
+  <p class="text-xs-center">
+    <%= "備註： #{@transportation.note}\t|\t聯絡電話： #{@transportation.concat}" %>
+  </p>
+  <hr>
+  <div id="controll" class="col-lg-12 p-a-0 btn-group" role="group">
+    <div class="col-md-3">
+      <%= link_to("回運補清單",transportations_path, class: "btn btn-outline-success") %>
+    </div>
+    <div class="text-xs-right col-md-9" >
+      <%= link_to("編輯紀錄表", edit_transportation_path(@transportation), class: "btn btn-outline-danger") %>
+      <!-- 多選button 輸出各種不同表單 -->
+      <div class="btn-group  dropup">
+        <button type="button" class="btn btn-outline-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          輸出PDF表單
+        </button>
+        <div class="dropdown-menu">
+          <%= link_to "預覽", transportation_path(params[:id],format: "pdf"), target: '_blank',class: "dropdown-item" %>
+          <%= link_to '送信', email_path(params[:id]), class: "dropdown-item" %>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

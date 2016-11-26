@@ -1,4 +1,5 @@
 class Staff < ApplicationRecord
-   validates :name, presence: true
-   validates :role, presence: true
+  has_many :transportation_crews
+  validates :name, presence: true
+  validates :role, presence: true
 end

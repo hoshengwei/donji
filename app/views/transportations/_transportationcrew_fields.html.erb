@@ -1,0 +1,11 @@
+<div class='nested-fields col-xs-12 p-x-0'>
+  <%= f.input :staff_id, label: '姓名',collection: Staff.all, input_html: { class: "custom-select" }, wrapper_html:{ class: 'col-xs-3 p-l-0'}%>
+  <%= f.input :status, label: '上/下',collection: ["上島", "下島"],input_html: { class: "custom-select" },  wrapper_html:{ class: 'col-xs-2 p-l-0'}%>
+  <%= f.input :direction, label: '運補地點',collection: ["馬公至東吉嶼","馬公至東嶼坪","東吉嶼至馬公","東嶼坪至馬公"],input_html: { class: "custom-select" },  wrapper_html:{ class: 'col-xs-6 p-l-0'} %>
+  <div class="col-xs-1 p-x-0">
+    <br>
+    <br>
+    <%= link_to_remove_association "移除", f, {class: 'btn btn-sm btn-danger p-y-20', type: "button" } %>
+  </div>
+
+</div>

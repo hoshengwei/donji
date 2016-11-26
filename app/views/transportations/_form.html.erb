@@ -1,0 +1,32 @@
+<%= simple_form_for @transportation do |f| %>
+  <div class="col-xs-12">
+    <%= f.input :date, label: '運補日期',wrapper_html:{ class: ''} %>
+    <hr>
+    <div class="form-inputs">
+      <div id='add_crews'>
+        <p>人員名冊</p>
+        <%= f.simple_fields_for :transportationcrews do |crew| %>
+          <%= render 'transportationcrew_fields', f:  crew %>
+        <% end %>
+        <hr>
+        <div class='links'>
+          <%= link_to_add_association '新增人員', f, :transportationcrews , {class: 'btn btn-sm btn-success', type: "button" } %>
+        </div>
+        <hr>
+      </div>
+      <%= f.input :note, label: '備註' %>
+      <%= f.input :concat, label: '聯絡電話' %>
+    </div>
+    <br>
+    <hr>
+    <div class="form-actions">
+      <%= link_to "取消" ,transportation_path(params[:id]),  class: "btn btn-outline-danger pull-xs-left"%>
+      <%= f.button :submit,  "新建｜更新名冊", class: "btn btn-outline-primary pull-xs-right" , data: { disable_with: "新建中..." }%>
+    </div>
+  </div>
+<% end %>
+
+<script>
+  // The date picker (read the docs)
+  $('#transportation_date').pickadate({format: 'yyyy-mm-dd', formatSubmit: false})
+</script>

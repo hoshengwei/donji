@@ -31,7 +31,7 @@
   </div>
   <div class="col-lg-12 col-xl-4 p-a-0" id="oil">
     <hr>
-    <p class="col-lg-6 col-xl-12 p-a-0"><span class="font-weight-bold">航程： </span><%= @ocean_inspect.distance %> 浬 &nbsp;/ &nbsp;<span class="font-weight-bold">油耗：</span> <%= @ocean_inspect.distance.to_f * Boat.find(@ocean_inspect.boat_id).fuelConsumption.to_f %> 公升</p>
+    <p class="col-lg-6 col-xl-12 p-a-0"><span class="font-weight-bold">航程： </span><%= @ocean_inspect.distance %> 浬 &nbsp;/ &nbsp;<span class="font-weight-bold">油耗：</span> <%= @ocean_inspect.gas_consumption %> 公升</p>
     <p class="col-lg-6 col-xl-12 p-a-0"><span class="font-weight-bold">加油： </span><%= @ocean_inspect.gas %> <%= "公升" if !@ocean_inspect.gas.nil? %></p>
   </div>
   <div class="col-lg-12 col-xl-8 p-a-0" id="work">

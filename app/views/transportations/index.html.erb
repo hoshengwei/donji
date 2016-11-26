@@ -1,0 +1,33 @@
+<div class="page-header">
+  <p></p>
+  <h2 class="h3">馬公運補船人員名冊  <%= link_to("新的紀錄", new_transportation_path, class: "btn btn-outline-primary pull-xs-right ") %></h2>
+  <hr>
+</div>
+<table class="table table-hover table-sm">
+  <thead class="bg-primary">
+    <tr>
+      <th>運補日期</th>
+      <th>運補人員</th>
+      <th>功能</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%  @transportations.each do |tp| %>
+      <tr>
+        <td><%= link_to tp.year.to_s + ' 年 ' + tp.month.to_s + ' 月 '  + tp.day.to_s + '日', transportation_path(tp) %></td>
+        <% @crews = String.new  %>
+        <% tp.transportationcrews.each do |crew| %>
+          <% @crews += "#{Staff.find(crew.staff_id).name}、" %>
+        <% end %>
+        <% @crews[-1] = "" %>
+        <td><%= @crews %></td>
+        <td class="btn-group" role="group">
+            <%= link_to("編輯", edit_transportation_path(tp), class: "btn btn-sm btn-outline-primary")%>
+            <%= link_to("刪除", transportation_path(tp),    class: "btn btn-sm btn-outline-primary",
+                        method: :delete, data: { confirm: "確定刪除該筆紀錄?" } )%>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<hr>
