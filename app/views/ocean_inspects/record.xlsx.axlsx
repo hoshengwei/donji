@@ -16,7 +16,16 @@ to_center = wb.styles.add_style border:  { style: :thin, color: "00"},
                                              wrap_text:  true},
                                 num_fmt: 3,
                                 sz: 12,
-                                format_code: '0.0'
+                                format_code: "0"
+
+to_decimal = wb.styles.add_style format_code: "0.0",
+                                 border:  { style: :thin, color: "00"},
+                                 alignment: { horizontal: :center,
+                                              vertical: :center ,
+                                              wrap_text:  true},
+                                 sz: 12
+
+
 sub_title = wb.styles.add_style border:  { style: :thin, color: "00"},
                                 alignment: { horizontal: :center,
                                              vertical: :center ,
@@ -24,6 +33,7 @@ sub_title = wb.styles.add_style border:  { style: :thin, color: "00"},
                                 sz: 12,
                                 num_fmt: 3,
                                 bg_color: 'a2a2a2'
+
 to_total = wb.styles.add_style border:  { style: :thin, color: "00"},
                                alignment: { horizontal: :center,
                                              vertical: :center ,
@@ -31,8 +41,17 @@ to_total = wb.styles.add_style border:  { style: :thin, color: "00"},
                                sz: 12,
                                b: true,
                                num_fmt: 3,
-                               format_code: '0.0',
                                bg_color: 'FFF60B'
+
+to_total_decimal = wb.styles.add_style border:  { style: :thin, color: "00"},
+                                       alignment: { horizontal: :center,
+                                                     vertical: :center ,
+                                                     wrap_text:  true},
+                                       sz: 12,
+                                       b: true,
+                                       format_code: "0.0",
+                                       bg_color: 'FFF60B'
+
 adjust = wb.styles.add_style  border:  { style: :thin, color: "00"},
                               alignment: { horizontal: :center,
                                             vertical: :center ,
@@ -40,6 +59,7 @@ adjust = wb.styles.add_style  border:  { style: :thin, color: "00"},
                               sz: 12,
                               bg_color: 'fefea8',
                               num_fmt: 3
+
 bottom = wb.styles.add_style  alignment: { horizontal: :left,
                                            vertical: :center ,
                                            wrap_text:  true},
@@ -122,7 +142,7 @@ wb.add_worksheet(name: "#{@insps.first.month}月小艇使用紀錄") do |sheet|
                         insp.note
                       ],
                       widths: [1],
-                      style: to_center
+                      style: [to_center,to_center,to_center,to_center,to_decimal,to_decimal,to_center,to_center,to_center,to_center,to_center,to_center,to_center,to_center,to_center,to_center,to_center]
       end
     end
     wday = String.new
@@ -135,14 +155,14 @@ wb.add_worksheet(name: "#{@insps.first.month}月小艇使用紀錄") do |sheet|
       wday = "四" if wday_i === 4
       wday = "五" if wday_i === 5
       wday = "六" if wday_i === 6
-      sheet.add_row [n, wday, "0:00", "0:00", 0, 0, "東吉港內", "維護保養", 0, 0, 0, "","許明中","","","保育1號",""], widths: [1], style: to_center
+      sheet.add_row [n, wday, "0:00", "0:00", 0.0, 0.0, "東吉港內", "維護保養", 0, 0, 0, "","許明中","","","保育1號",""], widths: [1], style: [to_center,to_center,to_center,to_center,to_decimal,to_decimal,to_center,to_center,to_center,to_center,to_center,to_center,to_center,to_center,to_center,to_center,to_center]
       empty_item += 1
     end
   end
   @total_item = @insps.count + empty_item
   sheet.add_row [
     "總航行時數","","","","=SUM(E4:E#{@total_item + 3 })","=SUM(F4:F#{@total_item + 3 })","小時","總計","=SUM(I4:I#{@total_item + 3 })","=SUM(J4:J#{@total_item + 3 })","=SUM(K4:K#{@total_item + 3 })","","","","","",""
-  ], style: to_total, width: [1]
+  ], style: [to_total,to_total,to_total,to_total,to_total_decimal,to_total_decimal,to_total,to_total,to_total,to_total,to_total,to_total,to_total,to_total,to_total,to_total,to_total], width: [1]
   sheet.merge_cells("A#{@total_item + 4 }:D#{@total_item + 4 }")
   sheet.merge_cells("L#{@total_item + 4 }:Q#{@total_item + 4 }")
   sheet.add_row ["製表: ","","","","","","","主管: "], style: bottom, width: [1], height: 30
