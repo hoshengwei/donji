@@ -30,7 +30,7 @@ class OceanInspectsController < ApplicationController
     year = data[0].to_i - 1911 if data != []
     month = data[1] if data != []
 
-    @ocean_inspects = OceanInspect.where(year: year).where(month: month)
+    @ocean_inspects = OceanInspect.where(year: year).where(month: month).order(:date)
   end
 
   # GET /ocean_inspects/1

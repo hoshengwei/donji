@@ -15,7 +15,8 @@ to_center = wb.styles.add_style border:  { style: :thin, color: "00"},
                                              vertical: :center ,
                                              wrap_text:  true},
                                 num_fmt: 3,
-                                sz: 12
+                                sz: 12,
+                                format_code: '0.0'
 sub_title = wb.styles.add_style border:  { style: :thin, color: "00"},
                                 alignment: { horizontal: :center,
                                              vertical: :center ,
@@ -30,6 +31,7 @@ to_total = wb.styles.add_style border:  { style: :thin, color: "00"},
                                sz: 12,
                                b: true,
                                num_fmt: 3,
+                               format_code: '0.0',
                                bg_color: 'FFF60B'
 adjust = wb.styles.add_style  border:  { style: :thin, color: "00"},
                               alignment: { horizontal: :center,
