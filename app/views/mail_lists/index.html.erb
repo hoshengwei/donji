@@ -1,0 +1,27 @@
+<div class="page-header col-md-6 offset-md-3">
+  <p></p>
+  <h2 class="Display-4 text-center p-x-1">寄件名單 <%= link_to("新的寄件地址", new_mail_list_path, class: "btn btn-outline-primary pull-xs-right ") %></h2>
+  <hr>
+
+  <table class="table table-hover table-sm">
+    <thead class="bg-primary">
+      <tr>
+        <th>送件地址</th>
+        <th>功能</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%  @mail_lists.each do |list| %>
+        <tr>
+          <td><%= list.address %></td>
+          <td class="btn-group" role="group">
+              <%= link_to("編輯", edit_mail_list_path(list), class: "btn btn-sm btn-outline-primary")%>
+              <%= link_to("刪除", mail_list_path(list),    class: "btn btn-sm btn-outline-primary",
+                          method: :delete, data: { confirm: "確定刪除該筆Email?" } )%>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+</div>

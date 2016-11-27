@@ -9,12 +9,10 @@ class SendMailMailer < ApplicationMailer
     @tp = transportation
     filename = "#{@tp.date}運補船人員名冊.pdf"
     attachments[filename] = TransportationPdf.new(@tp).render
-    mail to: [
-              "hoshengwei@gmail.com",
-              "hoshengwei@cpami.gov.tw"
-             ],
+    # 從資料庫抓取所有寄件地址存成array
+    mail_address =  []
+    MailList.all.each { |list| mail_address << list.address }
+    mail to: mail_address,
          subject: "東吉管理站#{@tp.month}/#{@tp.day}運補船名冊"
-
-
   end
 end

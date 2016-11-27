@@ -1,0 +1,12 @@
+<%= simple_form_for(@mail_list) do |f| %>
+
+
+  <div class="form-inputs">
+    <%= f.input :address, label: 'Email地址' %>
+  </div>
+
+  <div class="form-actions">
+    <%= link_to "取消" ,mail_lists_path(@mail_list),  class: "btn btn-outline-danger pull-xs-left"%>
+    <%= f.button :submit,  "新建｜更新地址", class: "btn btn-outline-primary pull-xs-right" , data: { disable_with: "新建中..." }%>
+  </div>
+<% end %>

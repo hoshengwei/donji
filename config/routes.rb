@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :mail_lists
   resources :transportations
   resources :usefuls
   resources :ocean_inspects

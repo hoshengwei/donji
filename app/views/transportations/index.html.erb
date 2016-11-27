@@ -1,6 +1,6 @@
 <div class="page-header">
   <p></p>
-  <h2 class="h3">馬公運補船人員名冊  <%= link_to("新的紀錄", new_transportation_path, class: "btn btn-outline-primary pull-xs-right ") %></h2>
+  <h2 class="h3">馬公運補名冊  <%= link_to "新的紀錄", new_transportation_path, class: "btn btn-outline-primary pull-xs-right " %><%= link_to "寄信名單", mail_lists_path, class: "btn btn-outline-success pull-xs-right " %></h2>
   <hr>
 </div>
 <table class="table table-hover table-sm">
@@ -14,7 +14,7 @@
   <tbody>
     <%  @transportations.each do |tp| %>
       <tr>
-        <td><%= link_to tp.year.to_s + ' 年 ' + tp.month.to_s + ' 月 '  + tp.day.to_s + '日', transportation_path(tp) %></td>
+        <td><%= link_to tp.month.to_s + ' 月 '  + tp.day.to_s + '日', transportation_path(tp) %></td>
         <% @crews = String.new  %>
         <% tp.transportationcrews.each do |crew| %>
           <% @crews += "#{Staff.find(crew.staff_id).name}、" %>
